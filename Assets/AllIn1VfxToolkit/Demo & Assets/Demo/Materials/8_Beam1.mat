@@ -6,7 +6,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":0.0,"g":0.11647939682006836,"b":1.0,"a":1.0},"time":0.0},{"color":{"r":0.0,"g":0.8323587775230408,"b":0.8773584961891174,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":0.24411383271217347},{"alpha":1.0,"time":0.4764782190322876},{"alpha":1.0,"time":1.0}]}
+  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":0.8679245114326477,"g":0.06140974536538124,"b":0.06140974536538124,"a":1.0},"time":0.0},{"color":{"r":0.0,"g":0.8323587775230408,"b":0.8773584961891174,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":0.30588236451148989},{"alpha":1.0,"time":0.5353017449378967},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -41,7 +41,7 @@ Texture2D:
   m_ColorSpace: 0
   m_PlatformBlob: 
   image data: 256
-  _typelessdata: 001effff0021ffff0023feff0026feff0029fdff002cfdff002ffcff0032fcff0035fbff0038fbff003bfaff003efaff0040f9ff0043f9ff0046f8ff0049f8ff004cf7ff004ff7ff0052f6ff0055f6ff0058f5ff005bf5ff005df4ff0060f4ff0063f3ff0066f3ff0069f2ff006cf2ff006ff1ff0072f1ff0075f0ff0078f0ff007aefff007defff0080eeff0083eeff0086edff0089edff008cecff008fecff0092ebff0095ebff0097eaff009aeaff009de9ff00a0e9ff00a3e8ff00a6e8ff00a9e7ff00ace7ff00afe6ff00b1e6ff00b4e5ff00b7e5ff00bae4ff00bde4ff00c0e3ff00c3e3ff00c6e2ff00c9e2ff00cce1ff00cee1ff00d1e0ff00d4e0ff
+  _typelessdata: dd1010ffda1313ffd61616ffd3191affcf1c1dffcc1f20ffc82223ffc52627ffc1292affbe2c2dffba2f31ffb73234ffb33537ffb0383bffac3b3effa93e41ffa54245ffa24548ff9e484bff9b4b4eff974e52ff945155ff905458ff8d575cff895b5fff855e62ff826166ff7e6469ff7b676cff776a6fff746d73ff707076ff6d7479ff69777dff667a80ff627d83ff5f8087ff5b838aff58868dff548990ff518c94ff4d9097ff4a939aff46969eff4399a1ff3f9ca4ff3c9fa8ff38a2abff35a5aeff31a9b1ff2eacb5ff2aafb8ff27b2bbff23b5bfff20b8c2ff1cbbc5ff19bec9ff15c2ccff12c5cfff0ec8d3ff0bcbd6ff07ced9ff04d1dcff00d4e0ff
   m_StreamData:
     serializedVersion: 2
     offset: 0
@@ -274,7 +274,7 @@ Material:
     - _ZoomAmount: 1.5
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8867924, g: 0.08630757, b: 0.071110725, a: 1}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
@@ -283,8 +283,8 @@ Material:
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0.13456745, g: 0.30129784, b: 0.6792453, a: 1}
+    - _RimColor: {r: 0.055637255, g: 0.0009803922, b: 0.0029411765, a: 1}
     - _Shape2Color: {r: 1, g: 1, b: 1, a: 1}
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ShapeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShapeColor: {r: 0.9339623, g: 0.013216423, b: 0.013216423, a: 1}
   m_BuildTextureStacks: []

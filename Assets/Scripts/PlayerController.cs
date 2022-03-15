@@ -25,6 +25,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         yield return new WaitForSeconds(0.75f);
         playerAnim.SetTrigger(AttackIn);
+        yield return new WaitForSeconds(0.75f);
+        playerAnim.SetTrigger(AttackOut);
         StartCoroutine(Attack());
     }
 }

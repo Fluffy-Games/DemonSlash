@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.NiceVibrations;
 using UnityEngine;
 
 public enum ColorType
@@ -61,6 +62,8 @@ public class PlayerController : MonoSingleton<PlayerController>
             if (slashable.colorType == colorType)
             {
                 _swordSlashCount++;
+                StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
+                MMVibrationManager.Haptic(HapticTypes.LightImpact);
                 playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
                 
                 if (_swordSlashCount % 2 == 0)

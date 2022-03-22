@@ -46,7 +46,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         UIManager.Instance.StartLevel();
         CameraManager.Instance.ChangeToMainCam();
         PlayerController.Instance.StartLevel();
-        PlayerController.Instance.StartAttack();
     }
     
     public void SetPathCreator()

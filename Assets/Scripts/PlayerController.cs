@@ -23,9 +23,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     // ReSharper disable once FunctionRecursiveOnAllPaths
     private IEnumerator Attack()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1.5f);
         playerAnim.SetTrigger(AttackIn);
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1.5f);
         playerAnim.SetTrigger(AttackOut);
         StartCoroutine(Attack());
     }

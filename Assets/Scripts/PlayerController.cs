@@ -39,19 +39,31 @@ public class PlayerController : MonoSingleton<PlayerController>
         Obstacle obstacle = other.GetComponentInParent<Obstacle>();
         Collectable collectable = other.GetComponentInParent<Collectable>();
         Gate gate = other.GetComponent<Gate>();
+        Slashable slashable = other.GetComponent<Slashable>();
         
-        if (obstacle && !obstacle.oneSlash)
+        if (obstacle )
         {
-            _swordSlashCount++;
-            print(_swordSlashCount.ToString());
-            playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
-            obstacle.oneSlash = true;
+            
+            
         }
 
         if (gate)
         {
             colorType = gate.colorType;
             UpdatePlayerColor();
+        }
+
+        if (slashable && !slashable.oneSlash)
+        {
+            _swordSlashCount++;
+            playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
+            slashable.Slash();
+            slashable.oneSlash = true;
+        }
+
+        if (collectable)
+        {
+            
         }
     }
 

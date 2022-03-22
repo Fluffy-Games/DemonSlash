@@ -55,10 +55,17 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (slashable && !slashable.oneSlash)
         {
-            _swordSlashCount++;
-            playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
-            slashable.Slash();
             slashable.oneSlash = true;
+            if (slashable.colorType == colorType)
+            {
+                _swordSlashCount++;
+                playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
+                slashable.Slash();
+            }
+            else
+            {
+                
+            }
         }
 
         if (collectable)

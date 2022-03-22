@@ -17,7 +17,7 @@ public class SwerveMovement : MonoBehaviour
         playerRoot.Translate(swerveAmount, 0, 0);
         
         _firstRot = modelTransform.localRotation;
-        _secondRot = Quaternion.Euler(0, Mathf.Clamp((swerveInput.moveX * 5f), -30f, 30f), 0);
+        _secondRot = Quaternion.Euler(0, Mathf.Clamp((swerveInput.moveX * 5f), -20f, 20f), 0);
         modelTransform.localRotation = Quaternion.Slerp(_firstRot, _secondRot, Time.deltaTime * 3f);
 
         if (playerRoot.localPosition.x < -_maxSwerveAmount)

@@ -8,6 +8,7 @@ public class Slashable : MonoBehaviour
     [SerializeField] private List<Transform> cutTargets;
     
     public bool oneSlash;
+    public ColorType colorType;
 
     public void Slash()
     {

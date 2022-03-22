@@ -637,6 +637,7 @@ MonoBehaviour:
   - {fileID: 2251696833948762431}
   - {fileID: 6273949666541961308}
   oneSlash: 0
+  colorType: 1
 --- !u!65 &8370628363048597171
 BoxCollider:
   m_ObjectHideFlags: 0

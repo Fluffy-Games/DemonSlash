@@ -15,6 +15,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private Material capeRed;
     [SerializeField] private Material capeGreen;
     [SerializeField] private Material capeYellow;
+    [SerializeField] private GameObject capeEffectRed;
+    [SerializeField] private GameObject capeEffectYellow;
+    [SerializeField] private GameObject capeEffectGreen;
     
     private static readonly int Run = Animator.StringToHash("run");
     private static readonly int AttackIn = Animator.StringToHash("attackIn");
@@ -58,12 +61,21 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             case ColorType.Green:
                 capeMesh.material = capeGreen;
+                capeEffectGreen.SetActive(true);
+                capeEffectYellow.SetActive(false);
+                capeEffectRed.SetActive(false);
                 break;
             case ColorType.Red:
                 capeMesh.material = capeRed;
+                capeEffectGreen.SetActive(false);
+                capeEffectYellow.SetActive(false);
+                capeEffectRed.SetActive(true);
                 break;
             case ColorType.Yellow:
                 capeMesh.material = capeYellow;
+                capeEffectGreen.SetActive(false);
+                capeEffectYellow.SetActive(true);
+                capeEffectRed.SetActive(false);
                 break;
         }
     }

@@ -49,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 176e268f7b8db8b4192a877ad770b09e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3fa32df4fcf9fe743bc98e66a0fab869, type: 3}
         m_Scale: {x: 0.78, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -228,14 +228,14 @@ Material:
     - _ZoomAmount: 1.5
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 0, g: 0.43849897, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingDark: {r: 1024, g: 0, b: 0, a: 1}
     - _ColorGradingLight: {r: 1, g: 0.9825753, b: 0, a: 1}
     - _ColorGradingMiddle: {r: 1024, g: 373.45883, b: 0, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0.33962262, g: 0.72808, b: 1, a: 1}
+    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shape2Color: {r: 1, g: 1, b: 1, a: 1}

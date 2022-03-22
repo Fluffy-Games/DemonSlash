@@ -18,6 +18,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject capeEffectRed;
     [SerializeField] private GameObject capeEffectYellow;
     [SerializeField] private GameObject capeEffectGreen;
+    [SerializeField] private ParticleSystem slashEffect1;
+    [SerializeField] private ParticleSystem slashEffect2;
     
     private static readonly int Run = Animator.StringToHash("run");
     private static readonly int AttackIn = Animator.StringToHash("attackIn");
@@ -60,6 +62,17 @@ public class PlayerController : MonoSingleton<PlayerController>
             {
                 _swordSlashCount++;
                 playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
+                
+                if (_swordSlashCount % 2 == 0)
+                {
+                    slashEffect1.Stop();
+                    slashEffect1.Play();
+                }
+                else
+                {
+                    slashEffect2.Stop();
+                    slashEffect2.Play();
+                }
                 slashable.Slash();
             }
             else

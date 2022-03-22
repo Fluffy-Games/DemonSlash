@@ -871,6 +871,7 @@ MonoBehaviour:
   - {fileID: 4091191455942552856}
   - {fileID: 2339368222449064266}
   oneSlash: 0
+  colorType: 0
 --- !u!65 &7156454320607656648
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1658,7 +1659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 387840693837323125, guid: 39090a3383033f04788c88779be21896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.16
+      value: 7.18
       objectReference: {fileID: 0}
     - target: {fileID: 387840693837323125, guid: 39090a3383033f04788c88779be21896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1666,7 +1667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 387840693837323125, guid: 39090a3383033f04788c88779be21896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.98
+      value: -17.46
       objectReference: {fileID: 0}
     - target: {fileID: 387840693837323125, guid: 39090a3383033f04788c88779be21896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1878,7 +1879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6176865607727561503, guid: ccba48b3d9a9cf94b9c121b887284604, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.76
+      value: -6.26
       objectReference: {fileID: 0}
     - target: {fileID: 6176865607727561503, guid: ccba48b3d9a9cf94b9c121b887284604, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1886,7 +1887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6176865607727561503, guid: ccba48b3d9a9cf94b9c121b887284604, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.57
+      value: -22.95
       objectReference: {fileID: 0}
     - target: {fileID: 6176865607727561503, guid: ccba48b3d9a9cf94b9c121b887284604, type: 3}
       propertyPath: m_LocalRotation.w

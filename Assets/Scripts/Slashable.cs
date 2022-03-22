@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Slashable : MonoBehaviour
@@ -26,12 +27,20 @@ public class Slashable : MonoBehaviour
         Material mat2 = go2.gameObject.GetComponent<MeshRenderer>().material;
         float timer = 0f;
 
+        float x1 = Random.Range(-0, 5);
+        float x2 = Random.Range(-5, 0);
+        float y1 = Random.Range(-2, 2);
+        float y2 = Random.Range(-2, 2);
+        Vector3 target1 = cutTargets[0].localPosition + (Vector3.right * x1) + (Vector3.up * y1);
+        Vector3 target2 = cutTargets[1].localPosition + (Vector3.right * x2) + (Vector3.up * y2);
+        go1.DOLocalJump(target1, 2, 1, .75f);
+        go2.DOLocalJump(target2, 2, 1, .75f);
         while (true)
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * 1.5f;
 
-            go1.localPosition = Vector3.Lerp(go1.localPosition, cutTargets[0].localPosition, timer);
-            go2.localPosition = Vector3.Lerp(go2.localPosition, cutTargets[1].localPosition, timer);
+            //go1.localPosition = Vector3.Lerp(go1.localPosition, cutTargets[0].localPosition, timer);
+            //go2.localPosition = Vector3.Lerp(go2.localPosition, cutTargets[1].localPosition, timer);
             mat1.SetFloat("_Dissolve", Mathf.Lerp(0, 1, timer));
             mat2.SetFloat("_Dissolve", Mathf.Lerp(0, 1, timer));
             yield return null;

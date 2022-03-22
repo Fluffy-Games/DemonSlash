@@ -5,7 +5,7 @@ public class SwerveMovement : MonoBehaviour
     [SerializeField] private Transform playerRoot;
     [SerializeField] private Transform modelTransform;
     
-    private readonly float _swerveSpeed = 0.15f;
+    private readonly float _swerveSpeed = 0.3f;
     private readonly float _maxSwerveAmount = 4f;
 
     private Quaternion _firstRot;

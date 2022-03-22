@@ -83,7 +83,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (collectable)
         {
-            
+            other.gameObject.SetActive(false);
         }
     }
 

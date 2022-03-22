@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6478976155530362293}
   - component: {fileID: 7946084676543967760}
   - component: {fileID: 5306048090552338138}
-  - component: {fileID: 6801362333344008434}
+  - component: {fileID: 7367514154835607663}
   - component: {fileID: 6801362333344008430}
+  - component: {fileID: 1962333354618406360}
   m_Layer: 0
   m_Name: Diamond
   m_TagString: Untagged
@@ -83,25 +84,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &6801362333344008434
-Animator:
-  serializedVersion: 3
+--- !u!114 &7367514154835607663
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5954359934491338511}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e994d02dda6cf01408635c7b71cd7539, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8442acf67e1e244c08a98a82fdfc6eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6801362333344008430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,3 +110,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinType: 1
   rotationSpeed: 100
+--- !u!65 &1962333354618406360
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954359934491338511}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.308656, y: 1.910558, z: 2.308656}
+  m_Center: {x: 0, y: -0.43036, z: 0}

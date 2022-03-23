@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 6_Aura_Base_1
+  m_Name: 6_Aura_Base_1 2
   m_Shader: {fileID: 4800000, guid: b430983578466934c944e7171b4c372c, type: 3}
   m_ShaderKeywords: ADDITIVECONFIG_ON COLORRAMPGRAD_ON COLORRAMP_ON HSV_ON PREMULTIPLYCOLOR_ON
     SHAPE1CONTRAST_ON SHAPE1DISTORT_ON SHAPE2CONTRAST_ON SHAPE2_ON
@@ -248,7 +248,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":0.7450980544090271,"g":0.01568637602031231,"b":0.015686294063925744,"a":1.0},"time":0.0},{"color":{"r":0.7735849022865295,"g":0.15818005800247193,"b":0.12771447002887727,"a":1.0},"time":0.45433738827705386},{"color":{"r":0.8313725590705872,"g":0.32200831174850466,"b":0.3176470398902893,"a":1.0},"time":0.9246509671211243},{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":1.0,"g":0.7960784435272217,"b":0.11764705926179886,"a":1.0},"time":0.0},{"color":{"r":1.0,"g":0.8627451062202454,"b":0.0,"a":1.0},"time":0.45433738827705386},{"color":{"r":0.810511589050293,"g":0.8313725590705872,"b":0.3176470398902893,"a":1.0},"time":0.9264667630195618},{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -283,7 +283,7 @@ Texture2D:
   m_ColorSpace: 0
   m_PlatformBlob: 
   image data: 256
-  _typelessdata: be0404ffbe0505ffbf0706ffbf0807ffbf0908ffbf0a09ffc00c0affc00d0bffc00e0cffc00f0dffc1110effc1120fffc11310ffc11511ffc21612ffc21713ffc21814ffc21a15ffc31b16ffc31c17ffc31d18ffc31f19ffc4201affc4211bffc4221cffc4241dffc5251effc5261fffc52820ffc52921ffc62a23ffc62c24ffc72d26ffc72f28ffc83029ffc8312bffc9332dffc9342effca3630ffca3732ffcb3833ffcb3a35ffcc3b36ffcc3d38ffcd3e3affcd3f3bffce413dffce423fffcf4440ffcf4542ffd04644ffd04845ffd14947ffd14b48ffd24c4affd24e4cffd34f4dffd3504fffd45251ffdb6d6cffe49291ffedb6b6fff6dbdaffffffffff
+  _typelessdata: ffcb1effffcc1dffffcc1cffffcd1bffffcd1affffce19ffffcf18ffffcf17ffffd016ffffd015ffffd114ffffd212ffffd211ffffd310ffffd30fffffd40effffd50dffffd50cffffd60bffffd60affffd709ffffd708ffffd807ffffd906ffffd905ffffda04ffffda03ffffdb02ffffdc01fffedc01fffddc04fffbdb06fffadb09fff8db0cfff6db0ffff5da11fff3da14fff1da17fff0d91affeed91cffedd91fffebd922ffe9d824ffe8d827ffe6d82affe4d82dffe3d72fffe1d732ffe0d735ffded737ffdcd63affdbd63dffd9d640ffd7d542ffd6d545ffd4d548ffd3d54bffd1d44dffcfd450ffd5da69ffe0e38effeaecb4fff5f6d9ffffffffff
   m_StreamData:
     serializedVersion: 2
     offset: 0

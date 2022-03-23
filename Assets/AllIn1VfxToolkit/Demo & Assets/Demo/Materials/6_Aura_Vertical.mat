@@ -6,7 +6,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":0.23529411852359773,"g":0.04313725605607033,"b":0.06115764379501343,"a":1.0},"time":0.0},{"color":{"r":0.5176470875740051,"g":0.10196078568696976,"b":0.17918840050697328,"a":1.0},"time":0.45433738827705386},{"color":{"r":0.8313725590705872,"g":0.3176470398902893,"b":0.4023311138153076,"a":1.0},"time":0.9612573385238648},{"color":{"r":0.8313725590705872,"g":0.40986666083335879,"b":0.4870629608631134,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":1.0,"g":0.07075470685958862,"b":0.1643996238708496,"a":1.0},"time":0.0},{"color":{"r":1.0,"g":0.3244103193283081,"b":0.2971698045730591,"a":1.0},"time":0.43823909759521487},{"color":{"r":1.0,"g":0.6084905862808228,"b":0.6084905862808228,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -41,7 +41,7 @@ Texture2D:
   m_ColorSpace: 0
   m_PlatformBlob: 
   image data: 256
-  _typelessdata: 3c0b10ff3f0c11ff410c12ff440d13ff460d14ff490e15ff4b0e16ff4e0f17ff500f18ff531019ff55101aff58111bff5a111cff5d121dff5f121eff62131fff641320ff671421ff691423ff6c1524ff6e1525ff711626ff731727ff761728ff781829ff7b182aff7d192bff80192cff821a2dff851b2eff871c30ff8a1e32ff8c2034ff8f2235ff912337ff942539ff96273bff99283dff9b2a3eff9e2c40ffa02e42ffa32f44ffa63146ffa83347ffab3449ffad364bffb0384dffb23a4effb53b50ffb73d52ffba3f54ffbc4156ffbf4257ffc14459ffc4465bffc6475dffc9495effcb4b60ffce4d62ffd04e64ffd35066ffd4556affd45f73ffd4697cff
+  _typelessdata: ff122affff142bffff172cffff192effff1b2fffff1e30ffff2031ffff2233ffff2534ffff2735ffff2936ffff2c37ffff2e39ffff303affff333bffff353cffff383effff3a3fffff3c40ffff3f41ffff4142ffff4344ffff4645ffff4846ffff4a47ffff4d49ffff4f4affff514bffff544dffff564fffff5851ffff5a53ffff5c56ffff5e58ffff605affff625cffff645fffff6661ffff6863ffff6a65ffff6c68ffff6e6affff706cffff726effff7471ffff7673ffff7875ffff7a77ffff7c7affff7f7cffff817effff8380ffff8582ffff8785ffff8987ffff8b89ffff8d8bffff8f8effff9190ffff9392ffff9594ffff9797ffff9999ffff9b9bff
   m_StreamData:
     serializedVersion: 2
     offset: 0
@@ -97,7 +97,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b6862a4be21bdf741aa46f77609471a4, type: 3}
+        m_Texture: {fileID: 2800000, guid: a0899f91edff0e44dadeaf43a58b4a51, type: 3}
         m_Scale: {x: 2, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -121,11 +121,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape3Tex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 2e0622a1d163f0542acfb20b4a50747c, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _ShapeDistortTex:
-        m_Texture: {fileID: 2800000, guid: 48da24d771916524899d36e4bfe7f762, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5e6209d62164ef04b9578609aebe7e64, type: 3}
         m_Scale: {x: 3.4, y: 3.4}
         m_Offset: {x: 0, y: 0}
     - _TrailWidthGradient:
@@ -161,7 +161,7 @@ Material:
     - _DepthGlowGlobal: 1
     - _DepthGlowPow: 4.59
     - _DistortAmount: 0.79
-    - _DistortTexXSpeed: 19.8
+    - _DistortTexXSpeed: 10
     - _DistortTexYSpeed: 50
     - _DistortionBlend: 0.306
     - _DistortionPower: -50
@@ -182,7 +182,7 @@ Material:
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 5
     - _HsvBright: 1.43
-    - _HsvSaturation: 1.87
+    - _HsvSaturation: 0.48
     - _HsvShift: 0
     - _LightAmount: 0.023
     - _MaskPow: 0.001
@@ -239,19 +239,19 @@ Material:
     - _Shape3DistortYSpeed: 0.1
     - _Shape3RotationOffset: 0
     - _Shape3RotationSpeed: 0
-    - _Shape3XSpeed: -0.1
-    - _Shape3YSpeed: -0.8
+    - _Shape3XSpeed: 1
+    - _Shape3YSpeed: 1
     - _ShapeAlphaWeight: 1
-    - _ShapeBrightness: -0.136
+    - _ShapeBrightness: -0.06
     - _ShapeColorWeight: 1
-    - _ShapeContrast: 1
+    - _ShapeContrast: 1.45
     - _ShapeDistortAmount: 0.62
     - _ShapeDistortXSpeed: 0
     - _ShapeDistortYSpeed: -0.35
     - _ShapeRotationOffset: 0
     - _ShapeRotationSpeed: 0
-    - _ShapeXSpeed: 0.05
-    - _ShapeYSpeed: -0.4
+    - _ShapeXSpeed: -0.12
+    - _ShapeYSpeed: 0.48
     - _SoftFactor: 0.5
     - _SrcMode: 1
     - _TextureScrollXSpeed: 1

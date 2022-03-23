@@ -34,6 +34,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         _swordSlashCount = 0;
         playerAnim.SetBool(Run, true);
+        GameManager.Instance.CurrentGameState = GameManager.GameState.MainGame;
     }
     
 
@@ -43,6 +44,12 @@ public class PlayerController : MonoSingleton<PlayerController>
         Collectable collectable = other.GetComponentInParent<Collectable>();
         Gate gate = other.GetComponent<Gate>();
         Slashable slashable = other.GetComponent<Slashable>();
+        
+        if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
+        {
+            GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
+            playerAnim.SetBool(Run,false);
+        }
         
         if (obstacle )
         {

@@ -21,6 +21,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject capeEffectGreen;
     [SerializeField] private ParticleSystem slashEffect1;
     [SerializeField] private ParticleSystem slashEffect2;
+    [SerializeField] private ParticleSystem colorChangeEffect;
     
     private static readonly int Run = Animator.StringToHash("run");
     private static readonly int AttackIn = Animator.StringToHash("attackIn");
@@ -60,6 +61,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         if (gate)
         {
             colorType = gate.colorType;
+            colorChangeEffect.Play();
             UpdatePlayerColor();
         }
 

@@ -183,9 +183,9 @@ Material:
     - _Shape2XSpeed: 0
     - _Shape2YSpeed: 0
     - _Shape3AlphaWeight: 2
-    - _Shape3Brightness: -0.112
+    - _Shape3Brightness: 0.23
     - _Shape3ColorWeight: 2
-    - _Shape3Contrast: 1
+    - _Shape3Contrast: 3.53
     - _Shape3DistortAmount: 0.5
     - _Shape3DistortXSpeed: 0.1
     - _Shape3DistortYSpeed: 0.1

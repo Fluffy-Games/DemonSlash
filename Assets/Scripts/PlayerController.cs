@@ -30,6 +30,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private int _swordSlashCount;
 
     public ColorType colorType;
+    private static readonly int Fall = Animator.StringToHash("fall");
 
     public void StartLevel()
     {
@@ -54,8 +55,11 @@ public class PlayerController : MonoSingleton<PlayerController>
         
         if (obstacle )
         {
-            
-            
+            GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
+            playerAnim.SetTrigger(Fall);
+            MMVibrationManager.Haptic(HapticTypes.Failure);
+            UIManager.Instance.RetryPanel();
+            StartCoroutine(FallRout());
         }
 
         if (gate)
@@ -89,7 +93,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
             else
             {
-                
+                MMVibrationManager.Haptic(HapticTypes.Failure);
             }
         }
 
@@ -122,5 +126,12 @@ public class PlayerController : MonoSingleton<PlayerController>
                 capeEffectRed.SetActive(false);
                 break;
         }
+    }
+
+    private IEnumerator FallRout()
+    {
+        StartCoroutine(CameraManager.Instance.CameraShake(4f));
+        yield return new WaitForSeconds(.75f);
+        StartCoroutine(CameraManager.Instance.CameraShake(4f));
     }
 }

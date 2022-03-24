@@ -21,6 +21,11 @@ public class UIManager : MonoSingleton<UIManager>
     {
         progressBar.fillAmount = value;
     }
+
+    public void RetryPanel()
+    {
+        retryPanel.SetActive(true);
+    }
     
     public IEnumerator LevelLoadRoutine(int index)
     {

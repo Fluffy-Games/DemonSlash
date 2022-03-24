@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.8381314, g: 0.82730913, b: 0.99472445, a: 1}
+  m_IndirectSpecularColor: {r: 0.838058, g: 0.82730913, b: 0.9947224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,6 +270,7 @@ MonoBehaviour:
   capeEffectGreen: {fileID: 6387377122910470706}
   slashEffect1: {fileID: 2216654124461484181}
   slashEffect2: {fileID: 1416259212}
+  colorChangeEffect: {fileID: 0}
   colorType: 0
 --- !u!54 &33630869
 Rigidbody:
@@ -1091,7 +1092,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh123854
+  m_Name: pb_Mesh24628
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1313,7 +1314,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472317132}
-  m_LocalRotation: {x: 0.13534985, y: -0.011029258, z: 0.0015067682, w: 0.99073535}
+  m_LocalRotation: {x: 0.13534985, y: -0.011029241, z: 0.0015067658, w: 0.99073535}
   m_LocalPosition: {x: 0.6935, y: 8.6735, z: -13.094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9660,6 +9661,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1218381813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: 8d0078e548af54e7b88b7c93b1a05e9a, type: 3}
+  m_PrefabInstance: {fileID: 1853699998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1218381814
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218381813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0.1, y: 0.63, z: 0}
 --- !u!4 &1219079847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6478976155530362293, guid: 8cb51a161cd9b3b48901e23106ce714e, type: 3}

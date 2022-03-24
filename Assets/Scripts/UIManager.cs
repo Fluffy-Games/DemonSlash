@@ -15,7 +15,9 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void StartLevel()
     {
+        print("yarrak");
         introPanel.GetComponent<Button>().interactable = false;
+        PlayerController.Instance.StartLevel();
     }
     public void LevelProgress(float value)
     {

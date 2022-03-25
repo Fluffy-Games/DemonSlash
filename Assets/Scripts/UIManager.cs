@@ -19,7 +19,7 @@ public class UIManager : MonoSingleton<UIManager>
     }
     public void LevelProgress(float value)
     {
-        progressBar.fillAmount = value;
+        //progressBar.fillAmount = value;
     }
 
     public void RetryPanel()

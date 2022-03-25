@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using PathCreation;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoSingleton<PlayerMovement>
 {
@@ -8,7 +10,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     [SerializeField] private EndOfPathInstruction endOfPathInstruction;
     [SerializeField] private SwerveMovement swerveMovement;
     [SerializeField] private float moveSpeed;
-    
+
     private PathCreator _pathCreator;
 
     private float _distanceTravelled;
@@ -52,5 +54,24 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         _pathCreator = pathCreators[0];
         _distanceTravelled = 0;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Ramp ramp = other.gameObject.GetComponent<Ramp>();
+
+        if (ramp)
+        {
+            if (ramp.toUp)
+            {
+                StartCoroutine(swerveMovement.RampMove(5.5f));
+                swerveMovement.UpdateMaxSwerve(-1, -4);
+            }
+            else
+            {
+                StartCoroutine(swerveMovement.RampMove(-5.5f));
+                StartCoroutine(swerveMovement.EndRampMove());
+            }
+        }
     }
 }

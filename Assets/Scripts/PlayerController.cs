@@ -25,7 +25,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private ParticleSystem slashEffect1;
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
-    [SerializeField] private ParticleSystem getsugaEffect;
+    [SerializeField] private GameObject getsugaEffect;
     private Vector3 _getsugaPos;
     
     private static readonly int Run = Animator.StringToHash("run");
@@ -67,7 +67,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (door)
         {
-            door.GetComponent<Animator>().SetTrigger(Getsuga);
+            GetsugaRout(door.target, door.GetComponent<Animator>());
+            playerAnim.SetTrigger(AttackIn);
         }
 
         if (obstacle )
@@ -154,15 +155,18 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void GetsugaRout(Transform target, Animator animator)
     {
-        getsugaEffect.Play();
-        getsugaEffect.transform.DOLocalMove(target.position, 1f).OnComplete(() => DoorAnimStart(animator));
+        getsugaEffect.SetActive(true);
+        getsugaEffect.transform.DOLocalMove(target.position, 1.5f);
+        StartCoroutine(DoorAnimStart(animator));
+        animator.gameObject.GetComponent<Door>().Smoke();
     }
 
-    private void DoorAnimStart(Animator animator)
+    private IEnumerator DoorAnimStart(Animator animator)
     {
+        yield return new WaitForSeconds(.5f);
         animator.SetTrigger(Getsuga);
         getsugaEffect.transform.localPosition = _getsugaPos;
-        getsugaEffect.Stop();
+        getsugaEffect.SetActive(false);
     }
     
 }

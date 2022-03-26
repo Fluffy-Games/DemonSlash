@@ -5,4 +5,10 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public Transform target;
+    [SerializeField] private ParticleSystem smoke;
+
+    public void Smoke()
+    {
+        smoke.Play();
+    }
 }

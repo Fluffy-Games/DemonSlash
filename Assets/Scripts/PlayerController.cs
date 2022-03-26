@@ -37,6 +37,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public ColorType colorType;
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Getsuga = Animator.StringToHash("getsuga");
+    private static readonly int Spin = Animator.StringToHash("spin");
 
     private void Start()
     {
@@ -67,8 +68,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (door)
         {
-            GetsugaRout(door.target, door.GetComponent<Animator>());
-            playerAnim.SetTrigger(AttackIn);
+            StartCoroutine(GetsugaRout(door.target, door.GetComponent<Animator>()));
+            playerAnim.SetTrigger(Spin);
         }
 
         if (obstacle )
@@ -153,8 +154,9 @@ public class PlayerController : MonoSingleton<PlayerController>
         StartCoroutine(CameraManager.Instance.CameraShake(4f));
     }
 
-    private void GetsugaRout(Transform target, Animator animator)
+    private IEnumerator GetsugaRout(Transform target, Animator animator)
     {
+        yield return new WaitForSeconds(.75f);
         getsugaEffect.SetActive(true);
         getsugaEffect.transform.DOLocalMove(target.position, 1.5f);
         StartCoroutine(DoorAnimStart(animator));

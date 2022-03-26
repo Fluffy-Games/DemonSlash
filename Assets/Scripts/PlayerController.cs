@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
+using JetBrains.Annotations;
 using MoreMountains.NiceVibrations;
 using UnityEngine;
 
@@ -19,11 +21,12 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject capeEffectRed;
     [SerializeField] private GameObject capeEffectYellow;
     [SerializeField] private GameObject capeEffectGreen;
-    [SerializeField] private GameObject leftDoor;
-    [SerializeField] private GameObject rightDoor;
+    
     [SerializeField] private ParticleSystem slashEffect1;
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
+    [SerializeField] private ParticleSystem getsugaEffect;
+    private Vector3 _getsugaPos;
     
     private static readonly int Run = Animator.StringToHash("run");
     private static readonly int AttackIn = Animator.StringToHash("attackIn");
@@ -33,6 +36,12 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public ColorType colorType;
     private static readonly int Fall = Animator.StringToHash("fall");
+    private static readonly int Getsuga = Animator.StringToHash("getsuga");
+
+    private void Start()
+    {
+        _getsugaPos = getsugaEffect.transform.localPosition;
+    }
 
     public void StartLevel()
     {
@@ -48,6 +57,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         Collectable collectable = other.GetComponentInParent<Collectable>();
         Gate gate = other.GetComponent<Gate>();
         Slashable slashable = other.GetComponent<Slashable>();
+        Door door = other.GetComponent<Door>();
         
         if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
         {
@@ -55,12 +65,11 @@ public class PlayerController : MonoSingleton<PlayerController>
             playerAnim.SetBool(Run,false);
         }
 
-        if (other.gameObject.CompareTag("getsuga"))
+        if (door)
         {
-            leftDoor.GetComponent<Animator>().SetTrigger("openLeft");
-            rightDoor.GetComponent<Animator>().SetTrigger("openRight");
+            door.GetComponent<Animator>().SetTrigger(Getsuga);
         }
-        
+
         if (obstacle )
         {
             GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
@@ -142,4 +151,18 @@ public class PlayerController : MonoSingleton<PlayerController>
         yield return new WaitForSeconds(.75f);
         StartCoroutine(CameraManager.Instance.CameraShake(4f));
     }
+
+    private void GetsugaRout(Transform target, Animator animator)
+    {
+        getsugaEffect.Play();
+        getsugaEffect.transform.DOLocalMove(target.position, 1f).OnComplete(() => DoorAnimStart(animator));
+    }
+
+    private void DoorAnimStart(Animator animator)
+    {
+        animator.SetTrigger(Getsuga);
+        getsugaEffect.transform.localPosition = _getsugaPos;
+        getsugaEffect.Stop();
+    }
+    
 }

@@ -19,6 +19,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject capeEffectRed;
     [SerializeField] private GameObject capeEffectYellow;
     [SerializeField] private GameObject capeEffectGreen;
+    [SerializeField] private GameObject leftDoor;
+    [SerializeField] private GameObject rightDoor;
     [SerializeField] private ParticleSystem slashEffect1;
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
@@ -51,6 +53,12 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
             playerAnim.SetBool(Run,false);
+        }
+
+        if (other.gameObject.CompareTag("getsuga"))
+        {
+            leftDoor.GetComponent<Animator>().SetTrigger("openLeft");
+            rightDoor.GetComponent<Animator>().SetTrigger("openRight");
         }
         
         if (obstacle )

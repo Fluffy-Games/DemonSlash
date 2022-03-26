@@ -27,6 +27,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
     [SerializeField] private GameObject getsugaEffect;
+    [SerializeField] private GameObject swordEnergy;
     
     private Vector3 _getsugaPos;
     
@@ -72,6 +73,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             StartCoroutine(GetsugaRout(door.target, door.GetComponent<Animator>()));
             playerAnim.SetTrigger(Spin);
+            swordEnergy.SetActive(true);
         }
 
         if (obstacle )
@@ -160,6 +162,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         yield return new WaitForSeconds(.75f);
         getsugaEffect.SetActive(true);
+        swordEnergy.SetActive(false);
         getsugaEffect.transform.DOLocalMove(target.position, 1.5f);
         StartCoroutine(DoorAnimStart(animator));
         animator.gameObject.GetComponent<Door>().Smoke();

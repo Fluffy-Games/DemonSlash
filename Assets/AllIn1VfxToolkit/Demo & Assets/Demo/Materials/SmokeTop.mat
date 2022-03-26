@@ -10,7 +10,7 @@ Material:
   m_Name: SmokeTop
   m_Shader: {fileID: 4800000, guid: b430983578466934c944e7171b4c372c, type: 3}
   m_ShaderKeywords: ADDITIVECONFIG_ON ALPHAFADEINPUTSTREAM_ON ALPHAFADEUSESHAPE1_ON
-    FADE_ON SOFTPART_ON
+    COLORGRADING_ON FADE_ON GLOW_ON SHAPE2_ON SOFTPART_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRampTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 432ef94ab2357044d93c4663d13c6dec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorRampTexGradient:
@@ -49,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6844d2760c633d54aa28ff5f7c0b7aab, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2f11cb3e431039e4d96f96deca35ecca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -65,8 +65,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape2Tex:
-        m_Texture: {fileID: 2800000, guid: 992852ad7302cab4fad62256affe0d4d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: c36ee9f793c6ab44288bf1f080689bd0, type: 3}
+        m_Scale: {x: 2, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape3DistortTex:
         m_Texture: {fileID: 2800000, guid: 48da24d771916524899d36e4bfe7f762, type: 3}
@@ -89,7 +89,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Alpha: 0.65
+    - _Alpha: 1
     - _AlphaBrightness: 0
     - _AlphaContrast: 1
     - _AlphaCutoffValue: 0.25
@@ -102,10 +102,10 @@ Material:
     - _CamDistFadeStepMax: 100
     - _CamDistFadeStepMin: 0
     - _CamDistProximityFade: 0
-    - _ColorGradingMidPoint: 0.5
+    - _ColorGradingMidPoint: 0.091
     - _ColorMask: 15
-    - _ColorRampBlend: 1
-    - _ColorRampLuminosity: 0
+    - _ColorRampBlend: 0.511
+    - _ColorRampLuminosity: 0.17
     - _CullingOption: 0
     - _DebugShape: 1
     - _DepthGlow: 0
@@ -119,18 +119,18 @@ Material:
     - _DistortionPower: 5
     - _DistortionScrollXSpeed: 0
     - _DistortionScrollYSpeed: 0
-    - _DstMode: 10
+    - _DstMode: 1
     - _EditorDrawers: 61
-    - _FadeAmount: -0.1
+    - _FadeAmount: 0.169
     - _FadeBurnGlow: 27
     - _FadeBurnWidth: 0.008
-    - _FadePower: 1
-    - _FadeScrollXSpeed: 0
+    - _FadePower: 7.85
+    - _FadeScrollXSpeed: 5
     - _FadeScrollYSpeed: 0
-    - _FadeTransition: 0.5
+    - _FadeTransition: 0.389
     - _FishEyeUvAmount: 0.35
     - _Glow: 0
-    - _GlowGlobal: 1
+    - _GlowGlobal: 46.37
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 5
     - _HsvBright: 1
@@ -148,7 +148,7 @@ Material:
     - _RandomSh1Mult: 1
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
-    - _RenderingMode: 5
+    - _RenderingMode: 1
     - _RimAddAmount: 1
     - _RimBias: 0
     - _RimErodesAlpha: 0
@@ -181,7 +181,7 @@ Material:
     - _Shape2RotationOffset: 0
     - _Shape2RotationSpeed: 0
     - _Shape2XSpeed: 0
-    - _Shape2YSpeed: 0
+    - _Shape2YSpeed: 1
     - _Shape3AlphaWeight: 2
     - _Shape3Brightness: 0
     - _Shape3ColorWeight: 2
@@ -209,7 +209,7 @@ Material:
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
     - _TimingSeed: 0
-    - _TrailWidthPower: 1
+    - _TrailWidthPower: 0.1
     - _TwistUvAmount: 1
     - _TwistUvPosX: 0.5
     - _TwistUvPosY: 0.5
@@ -229,16 +229,16 @@ Material:
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorGradingDark: {r: 0, g: 1, b: 0.82325125, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorGradingMiddle: {r: 1, g: 0.8820755, b: 0.8820755, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 1, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Shape2Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Shape2Color: {r: 1, g: 0.9764151, b: 0.9764151, a: 1}
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
     - _ShapeColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

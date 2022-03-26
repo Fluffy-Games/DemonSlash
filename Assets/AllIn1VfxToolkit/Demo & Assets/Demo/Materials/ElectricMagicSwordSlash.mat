@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: ElectricMagicSwordSlash
   m_Shader: {fileID: 4800000, guid: b430983578466934c944e7171b4c372c, type: 3}
-  m_ShaderKeywords: ALPHASMOOTHSTEP_ON COLORRAMPGRAD_ON COLORRAMP_ON GLOW_ON MASK_ON
-    PREMULTIPLYCOLOR_ON SHAPE1ROTATE_ON SHAPE2_ON
+  m_ShaderKeywords: ADDITIVECONFIG_ON ALPHASMOOTHSTEP_ON COLORRAMPGRAD_ON COLORRAMP_ON
+    GLOW_ON MASK_ON SHAPE1ROTATE_ON SHAPE2_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -50,7 +50,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 73978511e481b0744967f742fc6d91ed, type: 3}
-        m_Scale: {x: 2, y: 4}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
         m_Texture: {fileID: 2800000, guid: 7d4511258de72b248a57c4833c1c0aaf, type: 3}
@@ -85,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertOffsetTex:
-        m_Texture: {fileID: 2800000, guid: 48da24d771916524899d36e4bfe7f762, type: 3}
+        m_Texture: {fileID: 2800000, guid: 301f4d5d08c79ae4faf440eaea69009e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -94,7 +94,7 @@ Material:
     - _AlphaFadeAmount: -0.1
     - _AlphaFadePow: 1
     - _AlphaFadeSmooth: 0.075
-    - _AlphaStepMax: 0.32126868
+    - _AlphaStepMax: 0.005
     - _AlphaStepMin: 0
     - _CamDistFadeStepMax: 100
     - _CamDistFadeStepMin: 0
@@ -125,15 +125,15 @@ Material:
     - _FadeScrollXSpeed: 0
     - _FadeScrollYSpeed: 0
     - _FadeTransition: 0.075
-    - _Glow: 2.2
-    - _GlowGlobal: 1
+    - _Glow: 2.85
+    - _GlowGlobal: 0.9
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 5
     - _HsvBright: 1
     - _HsvSaturation: 1
     - _HsvShift: 180
     - _LightAmount: 0
-    - _MaskPow: 1
+    - _MaskPow: 3.32
     - _OffsetSh1: 1
     - _OffsetSh2: 1
     - _OffsetSh3: 1
@@ -207,11 +207,11 @@ Material:
     - _TwistUvPosX: 0.5
     - _TwistUvPosY: 0.5
     - _TwistUvRadius: 0.75
-    - _VertOffsetAmount: 0.5
-    - _VertOffsetPower: 1
-    - _VertOffsetTexXSpeed: 0.1
+    - _VertOffsetAmount: 0.58
+    - _VertOffsetPower: 3.98
+    - _VertOffsetTexXSpeed: 1.03
     - _VertOffsetTexYSpeed: 0.1
-    - _WaveAmount: 7
+    - _WaveAmount: 0
     - _WaveSpeed: 10
     - _WaveStrength: 7.5
     - _WaveX: 0
@@ -227,7 +227,7 @@ Material:
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0.7830189, g: 0.023360318, b: 0, a: 1}
+    - _GlowColor: {r: 0, g: 0.78431374, b: 0.7708817, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shape2Color: {r: 1, g: 1, b: 1, a: 1}
@@ -240,7 +240,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":0.02352941408753395,"g":0.09803922474384308,"b":0.10196079313755036,"a":1.0},"time":0.0},{"color":{"r":0.4245283007621765,"g":0.11213953793048859,"b":0.19346153736114503,"a":1.0},"time":0.32425421476364138},{"color":{"r":1.0,"g":0.06950663030147553,"b":0.0,"a":1.0},"time":0.6456244587898254},{"color":{"r":1.0,"g":0.37295326590538027,"b":0.349056601524353,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":0.05655927583575249,"g":0.37028083205223086,"b":0.38679248094558718,"a":1.0},"time":0.0},{"color":{"r":0.3063812851905823,"g":0.3189256191253662,"b":0.801886796951294,"a":1.0},"time":0.32425421476364138},{"color":{"r":0.0,"g":0.10148143768310547,"b":1.0,"a":1.0},"time":0.6456244587898254},{"color":{"r":0.3490196466445923,"g":0.3589736223220825,"b":1.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -275,7 +275,7 @@ Texture2D:
   m_ColorSpace: 1
   m_PlatformBlob: 
   image data: 256
-  _typelessdata: 06191aff0b191bff10191cff151a1dff1a1a1fff1f1a20ff241a21ff291a22ff2e1a23ff331b24ff381b25ff3d1b27ff421b28ff471b29ff4c1b2aff511c2bff561c2cff5b1c2dff601c2fff651c30ff6a1d31ff701c30ff781c2eff7f1b2bff861b29ff8d1a26ff951a24ff9c1921ffa3191fffaa181cffb2171affb91718ffc01615ffc71613ffcf1510ffd6150effdd140bffe41409ffec1307fff31304fffa1202ffff1301ffff1605ffff1a09ffff1d0dffff2111ffff2415ffff2819ffff2b1dffff2f21ffff3225ffff3629ffff392dffff3c31ffff4035ffff4339ffff473dffff4a41ffff4e45ffff5149ffff554dffff5851ffff5c55ffff5f59ff
+  _typelessdata: 0e5e63ff125e68ff155d6dff185c72ff1b5c77ff1e5b7dff215b82ff245a87ff27598cff2a5991ff2e5896ff31579cff3457a1ff3756a6ff3a55abff3d55b0ff4054b6ff4354bbff4753c0ff4a52c5ff4d52caff4c50ceff484dd0ff444ad3ff4048d5ff3c45d8ff3942daff353fddff313ddfff2d3ae2ff2937e4ff2534e7ff2132e9ff1e2fecff1a2ceeff1629f1ff1227f3ff0e24f6ff0a21f8ff061efbff031cfdff011bffff051effff0921ffff0d24ffff1127ffff152affff192cffff1d2fffff2132ffff2535ffff2938ffff2d3bffff313effff3541ffff3944ffff3d47ffff414affff454dffff4950ffff4d53ffff5156ffff5559ffff595cffff
   m_StreamData:
     serializedVersion: 2
     offset: 0

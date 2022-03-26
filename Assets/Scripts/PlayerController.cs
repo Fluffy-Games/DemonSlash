@@ -13,6 +13,7 @@ public enum ColorType
 }
 public class PlayerController : MonoSingleton<PlayerController>
 {
+    [SerializeField] private SwerveMovement swerveMovement;
     [SerializeField] private Animator playerAnim;
     [SerializeField] private SkinnedMeshRenderer capeMesh;
     [SerializeField] private Material capeRed;
@@ -26,6 +27,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
     [SerializeField] private GameObject getsugaEffect;
+    
     private Vector3 _getsugaPos;
     
     private static readonly int Run = Animator.StringToHash("run");
@@ -169,6 +171,15 @@ public class PlayerController : MonoSingleton<PlayerController>
         animator.SetTrigger(Getsuga);
         getsugaEffect.transform.localPosition = _getsugaPos;
         getsugaEffect.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(DoorCamera());
+    }
+
+    private IEnumerator DoorCamera()
+    {
+        StartCoroutine(swerveMovement.DoorMove(true));
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(swerveMovement.DoorMove(false));
     }
     
 }

@@ -21,7 +21,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     
     public void RestartLevel()
     {
-        //UIManager.Instance._retryPanel.SetActive(false);
+        UIManager.Instance.retryPanel.SetActive(false);
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
         //UIManager.Instance.UpdateIntroLevelTexts();
     }

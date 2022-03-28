@@ -15,6 +15,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 {
     [SerializeField] private SwerveMovement swerveMovement;
     [SerializeField] private Animator playerAnim;
+    [SerializeField] private GameObject modelRoot;
     [SerializeField] private SkinnedMeshRenderer capeMesh;
     [SerializeField] private Material capeRed;
     [SerializeField] private Material capeGreen;
@@ -124,6 +125,13 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             other.gameObject.SetActive(false);
         }
+    }
+    public void ResetModelPos()
+    {
+        modelRoot.transform.localPosition = Vector3.zero;
+        modelRoot.GetComponent<Animator>().gameObject.transform.position = Vector3.zero;
+        modelRoot.SetActive(false);
+        modelRoot.SetActive(true);
     }
 
     private void UpdatePlayerColor()

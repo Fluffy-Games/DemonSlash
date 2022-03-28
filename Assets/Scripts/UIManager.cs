@@ -7,7 +7,7 @@ public class UIManager : MonoSingleton<UIManager>
     [Header("Panels")]
     [SerializeField] private GameObject introPanel;
     [SerializeField] private GameObject gamePanel;
-    [SerializeField] private GameObject retryPanel;
+    [SerializeField] public GameObject retryPanel;
     [SerializeField] private GameObject nextLevelPanel;
     [SerializeField] private GameObject settingsPanel;
     
@@ -16,15 +16,23 @@ public class UIManager : MonoSingleton<UIManager>
     public void StartLevel()
     {
         introPanel.GetComponent<Button>().interactable = false;
+        introPanel.SetActive(false);
+        gamePanel.SetActive(true);
     }
     public void LevelProgress(float value)
     {
         //progressBar.fillAmount = value;
     }
+    public void IntroPanel()
+    {
+        introPanel.SetActive(true);
+        gamePanel.SetActive(false);
+    }
 
     public void RetryPanel()
     {
         retryPanel.SetActive(true);
+        gamePanel.SetActive(false);
     }
     
     public IEnumerator LevelLoadRoutine(int index)
@@ -34,6 +42,8 @@ public class UIManager : MonoSingleton<UIManager>
         yield return new WaitForSeconds(1f);
         LevelManager.Instance.ManageLevel(index);
         GameManager.Instance.CurrentGameState = GameManager.GameState.Prepare;
+        PlayerController.Instance.ResetModelPos();
+        IntroPanel();
         introPanel.GetComponent<Button>().enabled = true;
     }
 }

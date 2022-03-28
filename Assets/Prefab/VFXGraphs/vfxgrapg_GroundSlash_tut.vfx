@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 941
     y: -190
-    width: 2765
-    height: 2071
+    width: 2178
+    height: 2277
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2147,7 +2147,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614698}
   - {fileID: 8926484042661614717}
   dataType: 0
-  capacity: 200
+  capacity: 2000
   stripCapacity: 16
   particlePerStripCount: 16
   m_Space: 1
@@ -2509,7 +2509,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 100
+      m_SerializableObject: 1000
     m_Space: 2147483647
   m_Property:
     name: VelocityThreshold
@@ -4337,7 +4337,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 15
+      m_SerializableObject: 4
     m_Space: 2147483647
   m_Property:
     name: RatePerUnit
@@ -4371,7 +4371,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 50
+      m_SerializableObject: 1000
     m_Space: 2147483647
   m_Property:
     name: VelocityThreshold
@@ -4779,7 +4779,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614839}
   - {fileID: 8926484042661614879}
   dataType: 0
-  capacity: 250
+  capacity: 2000
   stripCapacity: 16
   particlePerStripCount: 16
   m_Space: 1

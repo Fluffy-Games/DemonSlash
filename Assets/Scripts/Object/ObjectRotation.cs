@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ObjectRotation : MonoBehaviour
 {
+    [SerializeField] private bool isCollectable;
     public enum SpinType
     {
         xAxis,
@@ -19,7 +20,10 @@ public class ObjectRotation : MonoBehaviour
     // Update is called once per frame
     private void Start()
     {
-        UpAndDown();
+        if (isCollectable)
+        {
+            UpAndDown();
+        }
     }
 
     void Update()

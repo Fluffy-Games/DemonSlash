@@ -4,6 +4,7 @@ using DG.Tweening;
 using JetBrains.Annotations;
 using MoreMountains.NiceVibrations;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public enum ColorType
 {
@@ -29,6 +30,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private ParticleSystem colorChangeEffect;
     [SerializeField] private GameObject getsugaEffect;
     [SerializeField] private GameObject swordEnergy;
+    [SerializeField] private GameObject endGetsugaEffect;
     
     private Vector3 _getsugaPos;
     
@@ -42,6 +44,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Getsuga = Animator.StringToHash("getsuga");
     private static readonly int Spin = Animator.StringToHash("spin");
+    private static readonly int JumpAttack = Animator.StringToHash("jumpAttack");
 
     private void Start()
     {
@@ -67,7 +70,8 @@ public class PlayerController : MonoSingleton<PlayerController>
         if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
         {
             GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
-            playerAnim.SetBool(Run,false);
+            playerAnim.SetTrigger(JumpAttack);
+            EndJumpAttack();
         }
 
         if (door)
@@ -193,5 +197,20 @@ public class PlayerController : MonoSingleton<PlayerController>
         yield return new WaitForSeconds(2f);
         StartCoroutine(swerveMovement.DoorMove(false));
     }
-    
+
+    private void EndJumpAttack()
+    {
+        Vector3 playerTarget = transform.localPosition + Vector3.forward * 10f;
+        transform.DOLocalMove(playerTarget, 1f);
+        StartCoroutine(EndGetsugaAttack());
+    }
+
+    private IEnumerator EndGetsugaAttack()
+    {
+        yield return new WaitForSeconds(1.3f);
+        Vector3 getsugaTarget = transform.localPosition + Vector3.forward * 30f;
+        endGetsugaEffect.SetActive(true);
+        endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
+        endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
+    }
 }

@@ -123,7 +123,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (collectable)
         {
-            other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            collectable.ImpactEffect();
         }
     }
     public void ResetModelPos()

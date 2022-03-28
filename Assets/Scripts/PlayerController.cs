@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using DG.Tweening;
-using JetBrains.Annotations;
 using MoreMountains.NiceVibrations;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -15,6 +13,7 @@ public enum ColorType
 public class PlayerController : MonoSingleton<PlayerController>
 {
     [SerializeField] private SwerveMovement swerveMovement;
+    [SerializeField] private AudioManager audioManager;
     [SerializeField] private Animator playerAnim;
     [SerializeField] private GameObject modelRoot;
     [SerializeField] private SkinnedMeshRenderer capeMesh;
@@ -105,6 +104,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                 _swordSlashCount++;
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
                 MMVibrationManager.Haptic(HapticTypes.LightImpact);
+                audioManager.SlashSound();
                 playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
                 
                 if (_swordSlashCount % 2 == 0)
@@ -129,6 +129,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             collectable.ImpactEffect();
+            audioManager.CollectSound();
         }
     }
     public void ResetModelPos()
@@ -183,7 +184,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private IEnumerator DoorAnimStart(Animator animator)
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.25f);
         animator.SetTrigger(Getsuga);
         getsugaEffect.transform.localPosition = _getsugaPos;
         getsugaEffect.SetActive(false);

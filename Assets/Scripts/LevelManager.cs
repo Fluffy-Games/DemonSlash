@@ -10,7 +10,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     private GameObject _currentLevel;
     private int _levelIndex;
     public int Index { get => _levelIndex; }
-    private void Start() 
+    private void OnEnable() 
     {
         //GameAnalytics.Initialize();
         _index = PlayerPrefs.GetInt("index", 0);

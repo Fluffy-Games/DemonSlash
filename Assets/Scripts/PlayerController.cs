@@ -39,7 +39,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     
     private int _swordSlashCount;
 
-    public ColorType colorType;
+    private ColorType colorType;
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Getsuga = Animator.StringToHash("getsuga");
     private static readonly int Spin = Animator.StringToHash("spin");
@@ -48,6 +48,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private void Start()
     {
         _getsugaPos = getsugaEffect.transform.localPosition;
+        SetColorType();
     }
 
     public void StartLevel()
@@ -56,7 +57,24 @@ public class PlayerController : MonoSingleton<PlayerController>
         playerAnim.SetBool(Run, true);
         GameManager.Instance.CurrentGameState = GameManager.GameState.MainGame;
     }
-    
+
+    private void SetColorType()
+    {
+        switch (LevelManager.Instance.Index % 3)
+        {
+            case 0:
+                colorType = ColorType.Yellow;
+                break;
+            case 1:
+                colorType = ColorType.Red;
+                break;
+            case 2:
+                colorType = ColorType.Green;
+                break;
+        }
+
+        UpdatePlayerColor();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Slashable : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class Slashable : MonoBehaviour
     [SerializeField] private List<Transform> cutTargets;
     
     public bool oneSlash;
+    public bool finalEnemy;
     public ColorType colorType;
 
     public void Slash()
@@ -50,5 +53,14 @@ public class Slashable : MonoBehaviour
             }
         }
         go.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            StartCoroutine(SlashRout(cutPieces[0]));
+        }
     }
 }

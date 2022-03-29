@@ -100,6 +100,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         if (slashable && !slashable.oneSlash)
         {
             slashable.oneSlash = true;
+            
             if (slashable.colorType == colorType)
             {
                 _swordSlashCount++;
@@ -214,7 +215,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         yield return new WaitForSeconds(1.3f);
         Vector3 getsugaTarget = transform.localPosition + Vector3.forward * 30f;
         endGetsugaEffect.SetActive(true);
-        
+        CameraManager.Instance.ChangeToSlash();
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
         endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
     }

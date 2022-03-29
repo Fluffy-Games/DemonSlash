@@ -6,6 +6,8 @@ public class CameraManager : MonoSingleton<CameraManager>
 {
     [SerializeField] private CinemachineVirtualCamera introCam;
     [SerializeField] private CinemachineVirtualCamera mainCam;
+    [SerializeField] private Transform slashFollow;
+    [SerializeField] private Transform slashLook;
     
     public void ChangeToIntroCam()
     {
@@ -17,6 +19,12 @@ public class CameraManager : MonoSingleton<CameraManager>
     {
         introCam.Priority = 0;
         mainCam.Priority = 1;
+    }
+
+    public void ChangeToSlash()
+    {
+        mainCam.Follow = slashFollow;
+        mainCam.LookAt = slashLook;
     }
     public IEnumerator CameraShake(float value)
     {

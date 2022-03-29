@@ -177,6 +177,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         yield return new WaitForSeconds(.75f);
         getsugaEffect.SetActive(true);
+        audioManager.GetsugaSound();
         swordEnergy.SetActive(false);
         getsugaEffect.transform.DOLocalMove(target.position, 1.5f);
         StartCoroutine(DoorAnimStart(animator));
@@ -209,9 +210,11 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private IEnumerator EndGetsugaAttack()
     {
+        audioManager.FinalGetsugaSound();
         yield return new WaitForSeconds(1.3f);
         Vector3 getsugaTarget = transform.localPosition + Vector3.forward * 30f;
         endGetsugaEffect.SetActive(true);
+        
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
         endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
     }

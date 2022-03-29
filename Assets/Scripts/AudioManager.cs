@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip collectSound;
     [SerializeField] private AudioClip slashSound;
+    [SerializeField] private AudioClip colorChangeSound;
 
     public void CollectSound()
     {
@@ -15,5 +16,9 @@ public class AudioManager : MonoBehaviour
     public void SlashSound()
     {
         audioSource.PlayOneShot(slashSound);
+    }
+    public void ColorChangeSound()
+    {
+        audioSource.PlayOneShot(colorChangeSound);
     }
 }

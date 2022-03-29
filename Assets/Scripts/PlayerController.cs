@@ -94,6 +94,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             colorType = gate.colorType;
             colorChangeEffect.Play();
             UpdatePlayerColor();
+            audioManager.ColorChangeSound();
         }
 
         if (slashable && !slashable.oneSlash)

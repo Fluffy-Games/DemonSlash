@@ -34,6 +34,12 @@ public class UIManager : MonoSingleton<UIManager>
         retryPanel.SetActive(true);
         gamePanel.SetActive(false);
     }
+
+    public void WinPanel()
+    {
+        gamePanel.SetActive(false);
+        nextLevelPanel.SetActive(true);
+    }
     
     public IEnumerator LevelLoadRoutine(int index)
     {

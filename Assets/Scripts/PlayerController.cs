@@ -236,5 +236,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         CameraManager.Instance.ChangeToSlash();
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
         endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
+        yield return new WaitForSeconds(3f);
+        UIManager.Instance.WinPanel();
     }
 }

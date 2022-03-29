@@ -31,6 +31,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject swordEnergy;
     [SerializeField] private GameObject endGetsugaEffect;
     
+    private int _currentDiamond;
+    private int _currentDemon;
+    
     private Vector3 _getsugaPos;
     
     private static readonly int Run = Animator.StringToHash("run");
@@ -121,6 +124,8 @@ public class PlayerController : MonoSingleton<PlayerController>
             
             if (slashable.colorType == colorType)
             {
+                _currentDemon++;
+                UIManager.Instance.DemonCountUpdate(_currentDemon);
                 _swordSlashCount++;
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
                 MMVibrationManager.Haptic(HapticTypes.LightImpact);
@@ -141,12 +146,16 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
             else
             {
+                _currentDemon--;
+                UIManager.Instance.DemonCountUpdate(_currentDemon);
                 MMVibrationManager.Haptic(HapticTypes.Failure);
             }
         }
 
         if (collectable)
         {
+            _currentDiamond++;
+            UIManager.Instance.ScoreUpdate(_currentDiamond);
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             collectable.ImpactEffect();
             audioManager.CollectSound();

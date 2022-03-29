@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] public GameObject retryPanel;
     [SerializeField] private GameObject nextLevelPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] TextMeshProUGUI _scoreText;
+    [SerializeField] TextMeshProUGUI _demonText;
     
     [SerializeField] private Image progressBar;
 
@@ -51,5 +54,15 @@ public class UIManager : MonoSingleton<UIManager>
         PlayerController.Instance.ResetModelPos();
         IntroPanel();
         introPanel.GetComponent<Button>().enabled = true;
+    }
+
+    public void DemonCountUpdate(int value)
+    {
+        _demonText.text = $"{value/2}";
+    }
+
+    public void ScoreUpdate(int value)
+    {
+        _scoreText.text = $"{value/2}";
     }
 }

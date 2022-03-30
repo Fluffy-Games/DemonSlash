@@ -7,6 +7,8 @@ using UnityEngine;
 public class ObjectRotation : MonoBehaviour
 {
     [SerializeField] private bool isCollectable;
+    private float _originY;
+    private float _targetY;
     public enum SpinType
     {
         xAxis,
@@ -22,6 +24,8 @@ public class ObjectRotation : MonoBehaviour
     {
         if (isCollectable)
         {
+            _originY = transform.localPosition.y;
+            _targetY = _originY + 0.5f;
             UpAndDown();
         }
     }
@@ -37,10 +41,10 @@ public class ObjectRotation : MonoBehaviour
 
     private void UpAndDown()
     {
-        transform.DOMoveY(0.6f, 0.5f).OnComplete(DownAndUp);
+        transform.DOMoveY(_originY, _targetY).OnComplete(DownAndUp);
     }
     private void DownAndUp()
     {
-        transform.DOMoveY(0.3f, 0.5f).OnComplete(UpAndDown);
+        transform.DOMoveY(_targetY, _originY).OnComplete(UpAndDown);
     }
 }

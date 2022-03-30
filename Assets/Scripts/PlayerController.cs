@@ -142,6 +142,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             else
             {
                 MMVibrationManager.Haptic(HapticTypes.Failure);
+                audioManager.WrongSound();
             }
         }
 

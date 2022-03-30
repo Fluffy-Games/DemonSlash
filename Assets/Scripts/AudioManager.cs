@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip colorChangeSound;
     [SerializeField] private AudioClip getsugaSound;
     [SerializeField] private AudioClip finalGetsugaSound;
-
+    [SerializeField] private AudioClip wrongSound;
     public void CollectSound()
     {
         audioSource.PlayOneShot(collectSound);
@@ -30,5 +30,9 @@ public class AudioManager : MonoBehaviour
     public void FinalGetsugaSound()
     {
         audioSource.PlayOneShot(finalGetsugaSound);
+    }
+    public void WrongSound()
+    {
+        audioSource.PlayOneShot(wrongSound);
     }
 }

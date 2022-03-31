@@ -10,13 +10,14 @@ Material:
   m_Name: 8_Splash
   m_Shader: {fileID: 4800000, guid: b430983578466934c944e7171b4c372c, type: 3}
   m_ShaderKeywords: ADDITIVECONFIG_ON ALPHAFADETRANSPARENCYTOO_ON ALPHAFADEUSESHAPE1_ON
-    ALPHAFADE_ON COLORRAMPGRAD_ON COLORRAMP_ON GLOW_ON HSV_ON PREMULTIPLYCOLOR_ON
-    SHAPE1CONTRAST_ON SHAPE1DISTORT_ON SHAPE2CONTRAST_ON SHAPE2_ON SHAPE3_ON
+    ALPHAFADE_ON COLORRAMPGRAD_ON COLORRAMP_ON GLOW_ON HSV_ON SHAPE1CONTRAST_ON SHAPE1DISTORT_ON
+    SHAPE2CONTRAST_ON SHAPE2_ON SHAPE3_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -120,7 +121,7 @@ Material:
     - _DistortionPower: 5
     - _DistortionScrollXSpeed: 0
     - _DistortionScrollYSpeed: 0
-    - _DstMode: 10
+    - _DstMode: 1
     - _EditorDrawers: 63
     - _FadeAmount: -0.1
     - _FadeBurnGlow: 5
@@ -149,7 +150,7 @@ Material:
     - _RandomSh1Mult: 1
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
-    - _RenderingMode: 5
+    - _RenderingMode: 2
     - _RimAddAmount: 1
     - _RimBias: 0
     - _RimErodesAlpha: 0
@@ -206,7 +207,7 @@ Material:
     - _ShapeXSpeed: 0
     - _ShapeYSpeed: 2.5
     - _SoftFactor: 0.5
-    - _SrcMode: 1
+    - _SrcMode: 4
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
     - _TimingSeed: 0
@@ -225,23 +226,23 @@ Material:
     - _WaveX: 0
     - _WaveY: 0.5
     - _ZTestMode: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     - _ZoomAmount: 1.5
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 1, g: 0, b: 0.061853886, a: 1}
+    - _Color: {r: 0.03137256, g: 0.99215686, b: 0.9474367, a: 1}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0, g: 0.4441254, b: 0.972549, a: 1}
+    - _GlowColor: {r: 0, g: 0.972549, b: 0.96429294, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shape2Color: {r: 1, g: 1, b: 1, a: 1}
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ShapeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShapeColor: {r: 7.999999, g: 7.999999, b: 7.999999, a: 1}
   m_BuildTextureStacks: []
 --- !u!28 &120912568046898199
 Texture2D:
@@ -249,7 +250,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":0.0},{"color":{"r":0.0,"g":0.8134150505065918,"b":1.0,"a":1.0},"time":0.3470359444618225},{"color":{"r":0.8207547068595886,"g":1.0,"b":0.9982349872589111,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_Name: _ColorRampTexGradientTex{"mode":0,"colorKeys":[{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":0.0},{"color":{"r":0.08611512184143067,"g":1.0,"b":0.0,"a":1.0},"time":0.3470359444618225},{"color":{"r":0.8207547068595886,"g":1.0,"b":0.9982349872589111,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -284,7 +285,7 @@ Texture2D:
   m_ColorSpace: 0
   m_PlatformBlob: 
   image data: 256
-  _typelessdata: fffffffff3fdffffe8fbffffdcf8ffffd0f6ffffc5f4ffffb9f2ffffadf0ffffa2eeffff96ebffff8ae9ffff7fe7ffff73e5ffff67e3ffff5ce1ffff50deffff44dcffff39daffff2dd8ffff21d6ffff16d3ffff0ad1ffff01d0ffff06d1ffff0bd2ffff10d3ffff15d4ffff1ad5ffff1fd7ffff24d8ffff29d9ffff2edaffff34dbffff39dcffff3eddffff43dfffff48e0ffff4de1ffff52e2ffff57e3ffff5ce4ffff61e6ffff66e7ffff6ce8ffff71e9ffff76eaffff7bebffff80ecffff85eeffff8aefffff8ff0ffff94f1ffff99f2ffff9ef3ffffa4f5ffffa9f6ffffaef7ffffb3f8ffffb8f9ffffbdfaffffc2fcffffc7fdffffccfeffffd1ffffff
+  _typelessdata: fffffffff4fff3ffeaffe8ffdfffdcffd4ffd0ffcaffc5ffbfffb9ffb4ffadffaaffa2ff9fff96ff94ff8aff8aff7fff7fff73ff74ff67ff6aff5cff5fff50ff54ff44ff4aff39ff3fff2dff34ff21ff2aff16ff1fff0aff17ff01ff1bff07ff20ff0dff24ff13ff29ff1aff2dff20ff32ff26ff36ff2cff3bff32ff40ff39ff44ff3fff49ff45ff4dff4bff52ff51ff56ff57ff5bff5eff5fff64ff64ff6aff69ff70ff6dff76ff72ff7dff76ff83ff7bff89ff7fff8fff84ff95ff88ff9cff8dffa2ff92ffa8ff96ffaeff9bffb4ff9fffbaffa4ffc1ffa8ffc7ffadffcdffb1ffd3ffb6ffd9ffbbffe0ffbfffe6ffc4ffecffc8fff2ffcdfff8ffd1ffffff
   m_StreamData:
     serializedVersion: 2
     offset: 0

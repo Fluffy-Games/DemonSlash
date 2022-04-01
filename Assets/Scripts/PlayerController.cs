@@ -30,6 +30,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject getsugaEffect;
     [SerializeField] private GameObject swordEnergy;
     [SerializeField] private GameObject endGetsugaEffect;
+
+    private int diamondCount;
+    private int demonSlashCount;
     
     private Vector3 _getsugaPos;
     
@@ -121,6 +124,8 @@ public class PlayerController : MonoSingleton<PlayerController>
             
             if (slashable.colorType == colorType)
             {
+                demonSlashCount++;
+                UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
                 _swordSlashCount++;
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
                 MMVibrationManager.Haptic(HapticTypes.LightImpact);
@@ -141,6 +146,8 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
             else
             {
+                demonSlashCount--;
+                UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
                 MMVibrationManager.Haptic(HapticTypes.Failure);
                 audioManager.WrongSound();
             }
@@ -148,6 +155,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (collectable)
         {
+            diamondCount++;
+            UIManager.Instance.DiamondCountUpdate(diamondCount);
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             collectable.ImpactEffect();
             audioManager.CollectSound();
@@ -155,9 +164,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     }
     public void ResetModelPos()
     {
-        modelRoot.transform.localPosition = Vector3.zero;
-        modelRoot.GetComponent<Animator>().gameObject.transform.position = Vector3.zero;
         modelRoot.SetActive(false);
+        modelRoot.transform.localPosition = Vector3.zero;
         modelRoot.SetActive(true);
     }
 
@@ -232,10 +240,11 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         audioManager.FinalGetsugaSound();
         yield return new WaitForSeconds(1.3f);
-        Vector3 getsugaTarget = transform.localPosition + Vector3.forward * 30f;
+        Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * 30f;
         endGetsugaEffect.SetActive(true);
         CameraManager.Instance.ChangeToSlash();
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
         endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
+        print(getsugaTarget);
     }
 }

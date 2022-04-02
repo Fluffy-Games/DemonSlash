@@ -34,6 +34,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private int diamondCount;
     private int demonSlashCount;
+    private int _diamond;
     
     private Vector3 _getsugaPos;
     
@@ -53,6 +54,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         _getsugaPos = getsugaEffect.transform.localPosition;
         SetColorType();
+        _diamond = PlayerPrefs.GetInt("diamond", 0);
     }
 
     public void StartLevel()
@@ -60,6 +62,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         _swordSlashCount = 0;
         playerAnim.SetBool(Run, true);
         GameManager.Instance.CurrentGameState = GameManager.GameState.MainGame;
+        UIManager.Instance.TotalDiamond(_diamond);
     }
 
     private void SetColorType()
@@ -90,6 +93,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         
         if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
         {
+            SumDiamond();
             GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
             playerAnim.SetTrigger(JumpAttack);
             EndJumpAttack();
@@ -164,6 +168,12 @@ public class PlayerController : MonoSingleton<PlayerController>
             collectable.ImpactEffect();
             audioManager.CollectSound();
         }
+    }
+    private void SumDiamond()
+    {
+        _diamond += diamondCount;
+        PlayerPrefs.SetInt("diamond", _diamond);
+        UIManager.Instance.TotalDiamond(_diamond);
     }
     public void ResetModelPos()
     {

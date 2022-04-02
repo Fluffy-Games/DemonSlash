@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private TextMeshProUGUI diamondText;
     [SerializeField] private TextMeshProUGUI levelTextIntro;
     [SerializeField] private TextMeshProUGUI levelTextGame;
+    [SerializeField] private TextMeshProUGUI totalDiamondTextGame;
+    [SerializeField] private List<TextMeshProUGUI> introLevelTexts;
     
     [SerializeField] private Slider powerBar;
 
@@ -44,6 +47,35 @@ public class UIManager : MonoSingleton<UIManager>
         introPanel.SetActive(true);
         gamePanel.SetActive(false);
         LevelTextUpdate(levelTextIntro);
+    }
+    public void UpdateIntroLevelTexts()
+    {
+        introLevelTexts[0].text = (LevelManager.Instance.Index-2).ToString();
+        introLevelTexts[1].text = (LevelManager.Instance.Index - 1).ToString();
+        introLevelTexts[2].text = (LevelManager.Instance.Index ).ToString();
+        introLevelTexts[3].text = (LevelManager.Instance.Index + 1).ToString();
+        introLevelTexts[4].text = (LevelManager.Instance.Index + 2).ToString();
+
+        if (LevelManager.Instance.Index <= 2)
+        {
+            if (LevelManager.Instance.Index == 1)
+            {
+                introLevelTexts[0].text = "";
+                introLevelTexts[1].text = "";
+                introLevelTexts[2].text = (LevelManager.Instance.Index + 0).ToString();
+                introLevelTexts[3].text = (LevelManager.Instance.Index + 1).ToString();
+                introLevelTexts[4].text = (LevelManager.Instance.Index + 2).ToString();
+            }
+
+            if (LevelManager.Instance.Index == 2)
+            {
+                introLevelTexts[0].text = "";
+                introLevelTexts[1].text = (LevelManager.Instance.Index -1).ToString();
+                introLevelTexts[2].text = (LevelManager.Instance.Index + 0).ToString();
+                introLevelTexts[3].text = (LevelManager.Instance.Index + 1).ToString();
+                introLevelTexts[4].text = (LevelManager.Instance.Index + 2).ToString();
+            }
+        }
     }
 
     public void RetryPanel()
@@ -126,5 +158,10 @@ public class UIManager : MonoSingleton<UIManager>
             }
             
         }
+    }
+
+    public void TotalDiamond(int diamond)
+    {
+        totalDiamondTextGame.text = $"{diamond}";
     }
 }

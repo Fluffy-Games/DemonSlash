@@ -16,14 +16,14 @@ public class LevelManager : MonoSingleton<LevelManager>
         _index = PlayerPrefs.GetInt("index", 0);
         _levelIndex = PlayerPrefs.GetInt("levelIndex", 1);
         ManageLevel(_index);
-        //UIManager.Instance.UpdateIntroLevelTexts();
+        UIManager.Instance.UpdateIntroLevelTexts();
     }
     
     public void RestartLevel()
     {
         UIManager.Instance.retryPanel.SetActive(false);
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
-        //UIManager.Instance.UpdateIntroLevelTexts();
+        UIManager.Instance.UpdateIntroLevelTexts();
     }
     public void LoadNextLevel()
     {
@@ -39,6 +39,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
         CameraManager.Instance.ChangeToIntroCam();
         PlayerController.Instance.ResetModelPos();
+        UIManager.Instance.UpdateIntroLevelTexts();
     }
     public void ManageLevel(int index)
     {

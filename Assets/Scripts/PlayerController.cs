@@ -126,6 +126,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             {
                 demonSlashCount++;
                 UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+                UIManager.Instance.PowerBarUpdate(1);
                 _swordSlashCount++;
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
                 MMVibrationManager.Haptic(HapticTypes.LightImpact);
@@ -148,6 +149,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             {
                 demonSlashCount--;
                 UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+                UIManager.Instance.PowerBarUpdate(-1);
                 MMVibrationManager.Haptic(HapticTypes.Failure);
                 audioManager.WrongSound();
             }

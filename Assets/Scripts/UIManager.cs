@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,11 +12,19 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject gamePanel;
     [SerializeField] public GameObject retryPanel;
     [SerializeField] private GameObject nextLevelPanel;
-    [SerializeField] private GameObject settingsPanel;
     [SerializeField] private TextMeshProUGUI demonText;
     [SerializeField] private TextMeshProUGUI diamondText;
     
-    [SerializeField] private Image progressBar;
+    [SerializeField] private Slider powerBar;
+
+    private float demonFontSize;
+    private float diamondFontSize;
+
+    private void Start()
+    {
+        demonFontSize = demonText.fontSize;
+        diamondFontSize = diamondText.fontSize;
+    }
 
     public void StartLevel()
     {
@@ -53,9 +63,52 @@ public class UIManager : MonoSingleton<UIManager>
     public void DemonSlashCountUpdate(int demonSlashCount)
     {
         demonText.text = $"{demonSlashCount}";
+        StartCoroutine(CustomPunchScale(demonText, demonFontSize));
+    }
+
+    public void PowerBarUpdate(int value)
+    {
+        if (value > 0)
+        {
+            powerBar.value += 0.05f;
+        }
+        else
+        {
+            powerBar.value -= 0.05f;
+        }
     }
     public void DiamondCountUpdate(int diamondCount)
     {
         diamondText.text = $"{diamondCount}";
+        StartCoroutine(CustomPunchScale(diamondText, diamondFontSize));
+    }
+
+    private IEnumerator CustomPunchScale(TextMeshProUGUI text, float origin)
+    {
+        float target = origin * 1.75f;
+        float timer = 0f;
+
+        while (true)
+        {
+            timer += Time.deltaTime * 7f;
+            text.fontSize = Mathf.Lerp(origin, target, timer);
+            yield return null;
+            if (timer >= 1f)
+            {
+                timer = 0f;
+                while (true)
+                {
+                    timer += Time.deltaTime * 7f;
+                    text.fontSize = Mathf.Lerp(target, origin, timer);
+                    yield return null;
+                    if (timer >= 1f)
+                    {
+                        break;
+                    }
+                }
+                break;
+            }
+            
+        }
     }
 }

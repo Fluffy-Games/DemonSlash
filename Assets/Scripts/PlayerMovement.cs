@@ -74,5 +74,15 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 StartCoroutine(swerveMovement.EndRampMove());
             }
         }
+
+        if (other.gameObject.CompareTag("RoadEntry"))
+        {
+            swerveMovement.UpdateMaxSwerve(4, 0);
+        }
+
+        if (other.gameObject.CompareTag("RoadExit"))
+        {
+            swerveMovement.UpdateMaxSwerve(4, -4);
+        }
     }
 }

@@ -8,6 +8,9 @@ TagManager:
   - Multiplier
   - getsuga
   - Enemy
+  - NotRamp
+  - RoadEntry
+  - RoadExit
   layers:
   - Default
   - TransparentFX

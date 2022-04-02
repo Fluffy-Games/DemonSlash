@@ -44,6 +44,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     public void StartLevel()
     {
+        _distanceTravelled = 0;
         GameManager.Instance.CurrentGameState = GameManager.GameState.MainGame;
         UIManager.Instance.StartLevel();
         CameraManager.Instance.ChangeToMainCam();

@@ -37,8 +37,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         PlayerPrefs.SetInt("index", _index);
         PlayerPrefs.SetInt("levelIndex", _levelIndex);
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
-        CameraManager.Instance.ChangeToMainCam();
-        //UIManager.Instance.UpdateIntroLevelTexts();
+        CameraManager.Instance.ChangeToIntroCam();
+        PlayerController.Instance.ResetModelPos();
     }
     public void ManageLevel(int index)
     {

@@ -8,12 +8,14 @@ using UnityEngine.UI;
 public class UIManager : MonoSingleton<UIManager>
 {
     [Header("Panels")]
-    [SerializeField] private GameObject introPanel;
+    [SerializeField] public GameObject introPanel;
     [SerializeField] private GameObject gamePanel;
     [SerializeField] public GameObject retryPanel;
     [SerializeField] private GameObject nextLevelPanel;
     [SerializeField] private TextMeshProUGUI demonText;
     [SerializeField] private TextMeshProUGUI diamondText;
+    [SerializeField] private TextMeshProUGUI levelTextIntro;
+    [SerializeField] private TextMeshProUGUI levelTextGame;
     
     [SerializeField] private Slider powerBar;
 
@@ -31,6 +33,7 @@ public class UIManager : MonoSingleton<UIManager>
         introPanel.GetComponent<Button>().interactable = false;
         introPanel.SetActive(false);
         gamePanel.SetActive(true);
+        LevelTextUpdate(levelTextGame);
     }
     public void LevelProgress(float value)
     {
@@ -40,12 +43,19 @@ public class UIManager : MonoSingleton<UIManager>
     {
         introPanel.SetActive(true);
         gamePanel.SetActive(false);
+        LevelTextUpdate(levelTextIntro);
     }
 
     public void RetryPanel()
     {
         retryPanel.SetActive(true);
         gamePanel.SetActive(false);
+    }
+    public void WinPanel()
+    {
+        nextLevelPanel.SetActive(true);
+        gamePanel.SetActive(false);
+        introPanel.GetComponent<Button>().interactable = true;
     }
     
     public IEnumerator LevelLoadRoutine(int index)
@@ -57,6 +67,7 @@ public class UIManager : MonoSingleton<UIManager>
         GameManager.Instance.CurrentGameState = GameManager.GameState.Prepare;
         PlayerController.Instance.ResetModelPos();
         IntroPanel();
+        powerBar.value = 0;
         introPanel.GetComponent<Button>().enabled = true;
     }
 
@@ -64,6 +75,11 @@ public class UIManager : MonoSingleton<UIManager>
     {
         demonText.text = $"{demonSlashCount}";
         StartCoroutine(CustomPunchScale(demonText, demonFontSize));
+    }
+
+    public void LevelTextUpdate(TextMeshProUGUI text)
+    {
+        text.text = $"{"LEVEL "+LevelManager.Instance.Index}";
     }
 
     public void PowerBarUpdate(int value)

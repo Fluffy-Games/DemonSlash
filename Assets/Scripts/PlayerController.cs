@@ -16,6 +16,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private Animator playerAnim;
     [SerializeField] private GameObject modelRoot;
+    [SerializeField] private GameObject playerRoot;
     [SerializeField] private SkinnedMeshRenderer capeMesh;
     [SerializeField] private Material capeRed;
     [SerializeField] private Material capeGreen;
@@ -168,7 +169,13 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         modelRoot.SetActive(false);
         modelRoot.transform.localPosition = Vector3.zero;
+        transform.position = Vector3.zero;
+        playerRoot.transform.localPosition = Vector3.zero;
         modelRoot.SetActive(true);
+        diamondCount = 0;
+        demonSlashCount = 0;
+        UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+        UIManager.Instance.DiamondCountUpdate(diamondCount);
     }
 
     private void UpdatePlayerColor()
@@ -247,6 +254,9 @@ public class PlayerController : MonoSingleton<PlayerController>
         CameraManager.Instance.ChangeToSlash();
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
         endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
-        print(getsugaTarget);
+        yield return new WaitForSeconds(3f);
+        UIManager.Instance.WinPanel();
+        endGetsugaEffect.SetActive(false);
+        endGetsugaEffect.GetComponentInChildren<VisualEffect>().Stop();
     }
 }

@@ -43,7 +43,7 @@ public class SwerveMovement : MonoBehaviour
         Vector3 targetFollow = originFollow + Vector3.up * y1;
         while (true)
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * 1.4f;
             modelTransform.localPosition = Vector3.Lerp(originModel, targetModel, timer);
             playerCamFollow.localPosition = Vector3.Lerp(originFollow, targetFollow, timer);
             yield return null;

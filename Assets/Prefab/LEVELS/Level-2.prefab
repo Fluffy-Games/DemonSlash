@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6099915070566627251}
+  - component: {fileID: 6836939997056844574}
   m_Layer: 0
   m_Name: Level-2
   m_TagString: Untagged
@@ -118,6 +119,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6836939997056844574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6099915070566627250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4e4b13a46084c4f982902af8d544d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelPaths:
+  - {fileID: 6099915071723797331}
 --- !u!1 &6099915070572624421
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,11 +304,32 @@ MonoBehaviour:
     _bezierPath:
       points:
       - {x: -0.12930608, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
-      - {x: 399.32373, y: 0, z: 0.00003051757}
-      - {x: 400.10437, y: 0, z: 0.00003051757}
+      - {x: -0.07676919, y: 0, z: 0}
+      - {x: 84.14293, y: 0, z: 0.000009276895}
+      - {x: 162.49538, y: 0, z: 0.000015258789}
+      - {x: 165.32469, y: 0, z: 0.000015474796}
+      - {x: 166.24539, y: 0, z: -1.1316223}
+      - {x: 168.53984, y: 0, z: -2.0222778}
+      - {x: 171.70679, y: 0, z: -3.251616}
+      - {x: 174.01514, y: 0, z: -3.9300106}
+      - {x: 176.91907, y: 0, z: -4.658737}
+      - {x: 180.76772, y: 0, z: -5.6245394}
+      - {x: 185.19432, y: 0, z: -6.033035}
+      - {x: 188.14398, y: 0, z: -6.0330353}
+      - {x: 190.62054, y: 0, z: -6.0330358}
+      - {x: 194.67575, y: 0.019449059, z: -5.2327766}
+      - {x: 197.54425, y: 0, z: -4.4625854}
+      - {x: 199.6901, y: -0.014549255, z: -3.8864288}
+      - {x: 202.41675, y: 0, z: -3.1207285}
+      - {x: 204.63971, y: 0, z: -2.2675018}
+      - {x: 207.24597, y: 0, z: -1.2671512}
+      - {x: 209.4446, y: 0, z: 0.000014985167}
+      - {x: 213.48286, y: 0, z: 0.000015258789}
+      - {x: 301.45667, y: 0, z: 0.000021219661}
+      - {x: 399.7774, y: 0, z: 0.00003051757}
+      - {x: 400.12964, y: 0, z: 0.00003051757}
       isClosed: 0
-      space: 2
+      space: 0
       controlMode: 0
       autoControlLength: 0.3
       boundsUpToDate: 0
@@ -301,6 +337,13 @@ MonoBehaviour:
         m_Center: {x: 199.98729, y: 0, z: 0.000015258785}
         m_Extent: {x: 200.1166, y: 0, z: 0.000015258785}
       perAnchorNormalsAngle:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
       - 0
       - 0
       globalNormalsAngle: 0
@@ -313,7 +356,7 @@ MonoBehaviour:
     showPerSegmentBounds: 0
     displayAnchorPoints: 1
     displayControlPoints: 1
-    bezierHandleScale: 5
+    bezierHandleScale: 0.1
     globalDisplaySettingsFoldout: 0
     keepConstantHandleSize: 1
     showNormalsInVertexMode: 0

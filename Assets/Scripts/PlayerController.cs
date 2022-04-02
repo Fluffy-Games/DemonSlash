@@ -37,6 +37,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private int _diamond;
     
     private Vector3 _getsugaPos;
+    private Vector3 _endGetsugaPos;
     
     private static readonly int Run = Animator.StringToHash("run");
     private static readonly int AttackIn = Animator.StringToHash("attackIn");
@@ -52,9 +53,10 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void Start()
     {
-        _getsugaPos = getsugaEffect.transform.localPosition;
-        SetColorType();
         _diamond = PlayerPrefs.GetInt("diamond", 0);
+        _getsugaPos = getsugaEffect.transform.localPosition;
+        _endGetsugaPos = endGetsugaEffect.transform.localPosition;
+        SetColorType();
     }
 
     public void StartLevel()
@@ -79,7 +81,6 @@ public class PlayerController : MonoSingleton<PlayerController>
                 colorType = ColorType.Green;
                 break;
         }
-
         UpdatePlayerColor();
     }
 
@@ -186,6 +187,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         demonSlashCount = 0;
         UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
         UIManager.Instance.DiamondCountUpdate(diamondCount);
+        SetColorType();
     }
 
     private void UpdatePlayerColor()
@@ -252,6 +254,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         Vector3 playerTarget = transform.localPosition + Vector3.forward * 10f;
         transform.DOLocalMove(playerTarget, 1f);
+        playerRoot.transform.DOLocalMove(Vector3.zero, 1f);
         StartCoroutine(EndGetsugaAttack());
     }
 
@@ -261,12 +264,13 @@ public class PlayerController : MonoSingleton<PlayerController>
         yield return new WaitForSeconds(1.3f);
         Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * 30f;
         endGetsugaEffect.SetActive(true);
-        CameraManager.Instance.ChangeToSlash();
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
         endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
+        CameraManager.Instance.ChangeToSlash();
         yield return new WaitForSeconds(3f);
+        endGetsugaEffect.GetComponentInChildren<VisualEffect>().Stop();
         UIManager.Instance.WinPanel();
         endGetsugaEffect.SetActive(false);
-        endGetsugaEffect.GetComponentInChildren<VisualEffect>().Stop();
+        endGetsugaEffect.transform.localPosition = _endGetsugaPos;
     }
 }

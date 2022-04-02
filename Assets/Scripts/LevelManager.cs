@@ -23,7 +23,6 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         UIManager.Instance.retryPanel.SetActive(false);
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
-        UIManager.Instance.UpdateIntroLevelTexts();
     }
     public void LoadNextLevel()
     {
@@ -37,9 +36,6 @@ public class LevelManager : MonoSingleton<LevelManager>
         PlayerPrefs.SetInt("index", _index);
         PlayerPrefs.SetInt("levelIndex", _levelIndex);
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
-        CameraManager.Instance.ChangeToIntroCam();
-        PlayerController.Instance.ResetModelPos();
-        UIManager.Instance.UpdateIntroLevelTexts();
     }
     public void ManageLevel(int index)
     {
@@ -57,6 +53,9 @@ public class LevelManager : MonoSingleton<LevelManager>
         }
         _currentLevel = levels[index];
         _currentLevel.SetActive(true);
+        CameraManager.Instance.ChangeToIntroCam();
+        PlayerController.Instance.ResetModelPos();
+        UIManager.Instance.UpdateIntroLevelTexts();
     }
 
     public void SetPaths(List<PathCreator> pathList)

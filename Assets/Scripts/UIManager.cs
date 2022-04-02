@@ -13,6 +13,8 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject gamePanel;
     [SerializeField] public GameObject retryPanel;
     [SerializeField] private GameObject nextLevelPanel;
+    [SerializeField] private GameObject gemObject;
+    [SerializeField] private Image fadePanel;
     [SerializeField] private TextMeshProUGUI demonText;
     [SerializeField] private TextMeshProUGUI diamondText;
     [SerializeField] private TextMeshProUGUI levelTextIntro;
@@ -22,13 +24,13 @@ public class UIManager : MonoSingleton<UIManager>
     
     [SerializeField] private Slider powerBar;
 
-    private float demonFontSize;
-    private float diamondFontSize;
+    private float _demonFontSize;
+    private float _diamondFontSize;
 
     private void Start()
     {
-        demonFontSize = demonText.fontSize;
-        diamondFontSize = diamondText.fontSize;
+        _demonFontSize = demonText.fontSize;
+        _diamondFontSize = diamondText.fontSize;
     }
 
     public void StartLevel()
@@ -94,19 +96,22 @@ public class UIManager : MonoSingleton<UIManager>
     {
         nextLevelPanel.SetActive(false);
         gamePanel.SetActive(false);
+        StartCoroutine(FadePanelRout(0, 1));
         yield return new WaitForSeconds(1f);
+        StartCoroutine(FadePanelRout(1, 0));
         LevelManager.Instance.ManageLevel(index);
         GameManager.Instance.CurrentGameState = GameManager.GameState.Prepare;
         PlayerController.Instance.ResetModelPos();
         IntroPanel();
         powerBar.value = 0;
         introPanel.GetComponent<Button>().enabled = true;
+        yield return new WaitForSeconds(1f);
     }
 
     public void DemonSlashCountUpdate(int demonSlashCount)
     {
         demonText.text = $"{demonSlashCount}";
-        StartCoroutine(CustomPunchScale(demonText, demonFontSize));
+        StartCoroutine(CustomPunchScale(demonText, _demonFontSize));
     }
 
     public void LevelTextUpdate(TextMeshProUGUI text)
@@ -128,7 +133,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void DiamondCountUpdate(int diamondCount)
     {
         diamondText.text = $"{diamondCount}";
-        StartCoroutine(CustomPunchScale(diamondText, diamondFontSize));
+        StartCoroutine(CustomPunchScale(diamondText, _diamondFontSize));
     }
 
     private IEnumerator CustomPunchScale(TextMeshProUGUI text, float origin)
@@ -158,6 +163,26 @@ public class UIManager : MonoSingleton<UIManager>
             }
             
         }
+    }
+
+    private IEnumerator FadePanelRout(float a, float b)
+    {
+        fadePanel.gameObject.SetActive(true);
+        Color color = fadePanel.color;
+        float timer = 0f;
+
+        while (true)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(a, b, timer);
+            fadePanel.color = color;
+            yield return null;
+            if (timer >= 1f)
+            {
+                break;
+            }
+        }
+        fadePanel.gameObject.SetActive(false);
     }
 
     public void TotalDiamond(int diamond)

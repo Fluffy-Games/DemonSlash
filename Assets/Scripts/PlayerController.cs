@@ -94,7 +94,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         
         if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
         {
-            SumDiamond();
             GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
             playerAnim.SetTrigger(JumpAttack);
             EndJumpAttack();
@@ -170,7 +169,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             audioManager.CollectSound();
         }
     }
-    private void SumDiamond()
+    public void SumDiamond()
     {
         _diamond += diamondCount;
         PlayerPrefs.SetInt("diamond", _diamond);

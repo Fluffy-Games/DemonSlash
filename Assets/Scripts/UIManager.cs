@@ -18,7 +18,9 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Image fadePanel;
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI demonText;
+    [SerializeField] private TextMeshProUGUI demonTextEnd;
     [SerializeField] private TextMeshProUGUI diamondText;
+    [SerializeField] private TextMeshProUGUI diamondTextEnd;
     [SerializeField] private TextMeshProUGUI levelTextIntro;
     [SerializeField] private TextMeshProUGUI levelTextGame;
     [SerializeField] private TextMeshProUGUI totalDiamondTextGame;
@@ -39,6 +41,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     private float _demonFontSize = 70f;
     private float _diamondFontSize = 70f;
+    private float _diamondTotalFontSize = 50f;
 
     private void Start()
     {
@@ -49,6 +52,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         introPanel.GetComponent<Button>().interactable = false;
         introPanel.SetActive(false);
+        gemObject.SetActive(false);
         gamePanel.SetActive(true);
         LevelTextUpdate(levelTextGame);
         PrepareCoins();
@@ -125,6 +129,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void DemonSlashCountUpdate(int demonSlashCount)
     {
         demonText.text = $"{demonSlashCount}";
+        demonTextEnd.text = "+" + $"{demonSlashCount}";
         StartCoroutine(CustomPunchScale(demonText, _demonFontSize));
     }
 
@@ -147,6 +152,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void DiamondCountUpdate(int diamondCount)
     {
         diamondText.text = $"{diamondCount}";
+        diamondTextEnd.text = "+" + $"{diamondCount}";
         StartCoroutine(CustomPunchScale(diamondText, _diamondFontSize));
     }
 
@@ -202,6 +208,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void TotalDiamond(int diamond)
     {
         totalDiamondTextGame.text = $"{diamond}";
+        StartCoroutine(CustomPunchScale(totalDiamondTextGame, _diamondTotalFontSize));
     }
     
     
@@ -217,6 +224,8 @@ public class UIManager : MonoSingleton<UIManager>
     }
     public void GemAnimate(Transform collectedCoinPosition)
     {
+        bool first = false;
+        gemObject.SetActive(true);
         for (int i = 0; i < _gemValue; i++)
         {
             //check if there's coins in the pool
@@ -237,7 +246,11 @@ public class UIManager : MonoSingleton<UIManager>
                         //executes whenever coin reach target position
                         coin.SetActive(false);
                         _coinsQueue.Enqueue(coin);
-                        
+                        if (!first)
+                        {
+                            first = true;
+                            PlayerController.Instance.SumDiamond();
+                        }
                     });
             }
         }

@@ -5,12 +5,17 @@ using UnityEngine;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     [SerializeField] private List<GameObject> levels;
-    
+
     private int _index;
     private GameObject _currentLevel;
     private int _levelIndex;
-    public int Index { get => _levelIndex; }
-    private void OnEnable() 
+
+    public int Index
+    {
+        get => _levelIndex;
+    }
+
+    private void OnEnable()
     {
         //GameAnalytics.Initialize();
         _index = PlayerPrefs.GetInt("index", 0);
@@ -18,12 +23,13 @@ public class LevelManager : MonoSingleton<LevelManager>
         ManageLevel(_index);
         UIManager.Instance.UpdateIntroLevelTexts();
     }
-    
+
     public void RestartLevel()
     {
         UIManager.Instance.retryPanel.SetActive(false);
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
     }
+
     public void LoadNextLevel()
     {
         //UIManager.Instance._nextLevelPanel.SetActive(false);
@@ -33,24 +39,29 @@ public class LevelManager : MonoSingleton<LevelManager>
         {
             _index = 4;
         }
+
         PlayerPrefs.SetInt("index", _index);
         PlayerPrefs.SetInt("levelIndex", _levelIndex);
         StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
     }
+
     public void ManageLevel(int index)
     {
-        if(_currentLevel)
+        if (_currentLevel)
         {
             _currentLevel.SetActive(false);
         }
-        if(index >= levels.Count)
+
+        if (index >= levels.Count)
         {
             _index = 4;
         }
-        if(levels.Count <= 0)
+
+        if (levels.Count <= 0)
         {
             return;
         }
+
         _currentLevel = levels[index];
         _currentLevel.SetActive(true);
         CameraManager.Instance.ChangeToIntroCam();
@@ -60,7 +71,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void SetPaths(List<PathCreator> pathList)
     {
-       PlayerMovement.Instance.pathCreators = pathList;
-       PlayerMovement.Instance.SetPathCreator();
+        PlayerMovement.Instance.pathCreators = pathList;
+        PlayerMovement.Instance.SetPathCreator();
     }
 }

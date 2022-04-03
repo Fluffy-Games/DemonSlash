@@ -14,6 +14,12 @@ public class Slashable : MonoBehaviour
     public bool finalEnemy;
     public ColorType colorType;
 
+    private void OnEnable()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        oneSlash = false;
+    }
+
     public void Slash()
     {
         int x = Random.Range(0, 3);

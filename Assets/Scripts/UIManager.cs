@@ -101,6 +101,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         retryPanel.SetActive(true);
         gamePanel.SetActive(false);
+        introPanel.GetComponent<Button>().interactable = true;
     }
     public void WinPanel()
     {

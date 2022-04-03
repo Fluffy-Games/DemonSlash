@@ -153,6 +153,14 @@ public class PlayerController : MonoSingleton<PlayerController>
             else
             {
                 demonSlashCount--;
+                if (demonSlashCount < 0)
+                {
+                    GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
+                    playerAnim.SetTrigger(Fall);
+                    MMVibrationManager.Haptic(HapticTypes.Failure);
+                    UIManager.Instance.RetryPanel();
+                    StartCoroutine(FallRout());
+                }
                 UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
                 UIManager.Instance.PowerBarUpdate(-1);
                 MMVibrationManager.Haptic(HapticTypes.Failure);

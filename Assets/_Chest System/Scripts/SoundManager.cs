@@ -30,11 +30,11 @@ using System.Collections;
 
         public delegate void OnMuteStatusChanged(bool isMuted);
 
-        public static event OnMuteStatusChanged MuteStatusChanged;
+        //public static event OnMuteStatusChanged MuteStatusChanged;
 
         public delegate void OnMusicStatusChanged(bool isOn);
 
-        public static event OnMusicStatusChanged MusicStatusChanged;
+        //public static event OnMusicStatusChanged MusicStatusChanged;
 
         enum PlayingState
         {

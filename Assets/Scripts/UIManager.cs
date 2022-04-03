@@ -5,6 +5,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -15,22 +16,33 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject nextLevelPanel;
     [SerializeField] private GameObject gemObject;
     [SerializeField] private Image fadePanel;
+    [Header("Texts")]
     [SerializeField] private TextMeshProUGUI demonText;
     [SerializeField] private TextMeshProUGUI diamondText;
     [SerializeField] private TextMeshProUGUI levelTextIntro;
     [SerializeField] private TextMeshProUGUI levelTextGame;
     [SerializeField] private TextMeshProUGUI totalDiamondTextGame;
     [SerializeField] private List<TextMeshProUGUI> introLevelTexts;
+
+    [Header("AnimatedGem")] 
+    [SerializeField] private GameObject animatedGem;
+    [SerializeField] private Transform targetPosition;
+    [SerializeField] [Range(0.5f, 1.5f)] float minAnimDuration;
+    [SerializeField] [Range(1.5f, 2.1f)] float maxAnimDuration;
+    [SerializeField] float spread;
+    [SerializeField] Ease easeType;
+
+    private int _gemValue = 40;
+    private Queue<GameObject> _coinsQueue = new Queue<GameObject>();
     
     [SerializeField] private Slider powerBar;
 
-    private float _demonFontSize;
-    private float _diamondFontSize;
+    private float _demonFontSize = 70f;
+    private float _diamondFontSize = 70f;
 
     private void Start()
     {
-        _demonFontSize = demonText.fontSize;
-        _diamondFontSize = diamondText.fontSize;
+        
     }
 
     public void StartLevel()
@@ -39,6 +51,7 @@ public class UIManager : MonoSingleton<UIManager>
         introPanel.SetActive(false);
         gamePanel.SetActive(true);
         LevelTextUpdate(levelTextGame);
+        PrepareCoins();
     }
     public void LevelProgress(float value)
     {
@@ -94,6 +107,7 @@ public class UIManager : MonoSingleton<UIManager>
     
     public IEnumerator LevelLoadRoutine(int index)
     {
+        yield return new WaitForSeconds(2f);
         nextLevelPanel.SetActive(false);
         gamePanel.SetActive(false);
         StartCoroutine(FadePanelRout(0, 1));
@@ -188,5 +202,44 @@ public class UIManager : MonoSingleton<UIManager>
     public void TotalDiamond(int diamond)
     {
         totalDiamondTextGame.text = $"{diamond}";
+    }
+    
+    
+    void PrepareCoins()
+    {
+        GameObject gem;
+        for (int i = 0; i < _gemValue; i++)
+        {
+            gem = Instantiate(animatedGem, nextLevelPanel.transform, true);
+            gem.SetActive(false);
+            _coinsQueue.Enqueue(gem);
+        }
+    }
+    public void GemAnimate(Transform collectedCoinPosition)
+    {
+        for (int i = 0; i < _gemValue; i++)
+        {
+            //check if there's coins in the pool
+            if (_coinsQueue.Count > 0)
+            {
+                //extract a coin from the pool
+                GameObject coin = _coinsQueue.Dequeue();
+                coin.SetActive(true);
+
+                //move coin to the collected coin pos
+                coin.transform.position = collectedCoinPosition.position + new Vector3(Random.Range(-spread, spread), 0f, 0f);
+
+                //animate coin to target position
+                float duration = Random.Range(minAnimDuration, maxAnimDuration);
+                coin.transform.DOMove(targetPosition.position, duration)
+                    .SetEase(easeType)
+                    .OnComplete(() => {
+                        //executes whenever coin reach target position
+                        coin.SetActive(false);
+                        _coinsQueue.Enqueue(coin);
+                        
+                    });
+            }
+        }
     }
 }

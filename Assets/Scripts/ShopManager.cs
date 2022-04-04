@@ -1,18 +1,65 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : MonoSingleton<ShopManager>
 {
     [SerializeField] private List<GameObject> swordObjects;
     [SerializeField] private List<GameObject> swordUi;
+    [SerializeField] private List<GameObject> winSwordUi;
 
+    private int _preUnlockIndex;
     private int _unlockIndex;
     private int _swordIndex;
     private void Start()
     {
+        _preUnlockIndex = PlayerPrefs.GetInt("preUnlockIndex", 0);
         _swordIndex = PlayerPrefs.GetInt("swordIndex", 0);
         _unlockIndex = PlayerPrefs.GetInt("unlockIndex", 1);
         UnlockItem();
+        EquipItem(_swordIndex);
+    }
+
+    public void IncreasePreUnlock()
+    {
+        int value = _preUnlockIndex;
+        _preUnlockIndex += 20;
+        PlayerPrefs.SetInt("preUnlockIndex", _preUnlockIndex);
+        TextMeshProUGUI text = winSwordUi[_unlockIndex + 1].transform.GetChild(2).gameObject
+            .GetComponent<TextMeshProUGUI>();
+        Image image = winSwordUi[_unlockIndex + 1].transform.GetChild(1).gameObject
+            .GetComponent<Image>();
+        StartCoroutine(IncreasePreUnlockRout(text, image, value));
+    }
+
+    private IEnumerator IncreasePreUnlockRout(TextMeshProUGUI text, Image image, int textValue)
+    {
+        yield return new WaitForSeconds(0.5f);
+        for (int i = 0; i <= 20; i++)
+        {
+            text.text = (textValue + i) + "/100";
+            image.fillAmount = ((float)textValue + i)/ 100;
+            yield return new WaitForSeconds(0.025f);
+        }
+    }
+
+    public void CheckPreUnlock()
+    {
+        if (_preUnlockIndex >= 100)
+        {
+            _unlockIndex++;
+            PlayerPrefs.SetInt("unlockIndex", _unlockIndex);
+            _preUnlockIndex = 0;
+            PlayerPrefs.SetInt("preUnlockIndex", _preUnlockIndex);
+        }
+
+        foreach (var item in winSwordUi)
+        {
+            item.SetActive(false);
+        }
+        winSwordUi[_unlockIndex + 1].SetActive(true);
     }
     
     private void UpdateSwords()

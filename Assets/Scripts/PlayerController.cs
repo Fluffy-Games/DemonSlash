@@ -105,6 +105,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
             playerAnim.SetTrigger(JumpAttack);
             EndJumpAttack();
+            ShopManager.Instance.CheckPreUnlock();
         }
 
         if (door)
@@ -285,6 +286,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         yield return new WaitForSeconds(3f);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Stop();
         UIManager.Instance.WinPanel();
+        ShopManager.Instance.IncreasePreUnlock();
         endGetsugaEffect.SetActive(false);
         endGetsugaEffect.transform.localPosition = _endGetsugaPos;
     }

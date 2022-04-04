@@ -14,6 +14,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject gamePanel;
     [SerializeField] public GameObject retryPanel;
     [SerializeField] private GameObject nextLevelPanel;
+    [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject gemObject;
     [SerializeField] private Image fadePanel;
     [Header("Texts")]
@@ -255,5 +256,10 @@ public class UIManager : MonoSingleton<UIManager>
                     });
             }
         }
+    }
+
+    public void ShopPanelOpen(bool value)
+    {
+        shopPanel.SetActive(value);
     }
 }

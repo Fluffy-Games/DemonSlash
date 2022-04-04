@@ -35,6 +35,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private int diamondCount;
     private int demonSlashCount;
     private int _diamond;
+    public int Diamond => _diamond;
     
     private Vector3 _getsugaPos;
     private Vector3 _endGetsugaPos;
@@ -53,9 +54,10 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void Start()
     {
-        _diamond = PlayerPrefs.GetInt("diamond", 0);
+        _diamond = PlayerPrefs.GetInt("diamond", 20000);
         _getsugaPos = getsugaEffect.transform.localPosition;
         _endGetsugaPos = endGetsugaEffect.transform.localPosition;
+        UIManager.Instance.TotalDiamond(_diamond);
         SetColorType();
     }
 
@@ -67,6 +69,12 @@ public class PlayerController : MonoSingleton<PlayerController>
         UIManager.Instance.TotalDiamond(_diamond);
     }
 
+    public void UpdateTotalDiamond(int value)
+    {
+        _diamond = value;
+        PlayerPrefs.SetInt("diamond", _diamond);
+        UIManager.Instance.TotalDiamond(_diamond);
+    }
     private void SetColorType()
     {
         switch (LevelManager.Instance.Index % 3)

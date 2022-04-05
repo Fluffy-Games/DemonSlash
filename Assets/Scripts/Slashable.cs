@@ -9,6 +9,7 @@ public class Slashable : MonoBehaviour
 {
     [SerializeField] private List<GameObject> cutPieces;
     [SerializeField] private List<Transform> cutTargets;
+    private Vector3 _originPos = new Vector3(0, 1.77f, 2.82f);
     
     public bool oneSlash;
     public bool finalEnemy;
@@ -17,6 +18,7 @@ public class Slashable : MonoBehaviour
     private void OnEnable()
     {
         transform.GetChild(0).gameObject.SetActive(true);
+        ResetModel();
         oneSlash = false;
     }
 
@@ -25,6 +27,15 @@ public class Slashable : MonoBehaviour
         int x = Random.Range(0, 3);
         transform.GetChild(0).gameObject.SetActive(false);
         StartCoroutine(SlashRout(cutPieces[x]));
+    }
+
+    private void ResetModel()
+    {
+        foreach (var item in cutPieces)
+        {
+            item.transform.GetChild(0).localPosition = _originPos;
+            item.transform.GetChild(1).localPosition = _originPos;
+        }
     }
 
     private IEnumerator SlashRout(GameObject go)

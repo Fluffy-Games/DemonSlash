@@ -24,7 +24,7 @@ public class ObjectRotation : MonoBehaviour
     {
         if (isCollectable)
         {
-            _originY = transform.localPosition.y;
+            _originY = transform.localPosition.y + 0.1f;
             _targetY = _originY + 0.5f;
             UpAndDown();
         }
@@ -41,10 +41,10 @@ public class ObjectRotation : MonoBehaviour
 
     private void UpAndDown()
     {
-        transform.DOMoveY(_originY, _targetY).OnComplete(DownAndUp);
+        transform.DOMoveY(_targetY, .8f).OnComplete(DownAndUp);
     }
     private void DownAndUp()
     {
-        transform.DOMoveY(_targetY, _originY).OnComplete(UpAndDown);
+        transform.DOMoveY(_originY, .8f).OnComplete(UpAndDown);
     }
 }

@@ -66,7 +66,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (ramp.toUp)
             {
                 StartCoroutine(swerveMovement.RampMove(5.5f));
-                swerveMovement.UpdateMaxSwerve(-1, -4);
+                swerveMovement.UpdateMaxSwerve(-1.7f, -4);
             }
             else
             {
@@ -77,7 +77,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
         if (other.gameObject.CompareTag("RoadEntry"))
         {
-            swerveMovement.UpdateMaxSwerve(4, 0);
+            swerveMovement.UpdateMaxSwerve(4, -.5f);
         }
 
         if (other.gameObject.CompareTag("RoadExit"))

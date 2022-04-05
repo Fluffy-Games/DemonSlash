@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using MoreMountains.NiceVibrations;
@@ -52,6 +53,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     private static readonly int Spin = Animator.StringToHash("spin");
     private static readonly int JumpAttack = Animator.StringToHash("jumpAttack");
 
+    private float _lavaTimer;
+    private int _upgradeValue;
+    private int _upgradeCost;
+
     private void Start()
     {
         _diamond = PlayerPrefs.GetInt("diamond", 20000);
@@ -99,6 +104,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         Gate gate = other.GetComponent<Gate>();
         Slashable slashable = other.GetComponent<Slashable>();
         Door door = other.GetComponent<Door>();
+        LavaObstacle lavaObstacle = other.GetComponent<LavaObstacle>();
         
         if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
         {
@@ -108,6 +114,23 @@ public class PlayerController : MonoSingleton<PlayerController>
             ShopManager.Instance.CheckPreUnlock();
         }
 
+        if (lavaObstacle)
+        {
+            _lavaTimer = 0f;
+            demonSlashCount-= 2;
+            if (demonSlashCount < 0)
+            {
+                GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
+                playerAnim.SetTrigger(Fall);
+                MMVibrationManager.Haptic(HapticTypes.Failure);
+                UIManager.Instance.RetryPanel();
+                StartCoroutine(FallRout());
+            }
+            UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+            UIManager.Instance.PowerBarUpdate(-0.1f);
+            MMVibrationManager.Haptic(HapticTypes.Failure);
+            audioManager.WrongSound();
+        }
         if (door)
         {
             StartCoroutine(GetsugaRout(door.target, door.GetComponent<Animator>()));
@@ -140,7 +163,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             {
                 demonSlashCount++;
                 UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
-                UIManager.Instance.PowerBarUpdate(1);
+                UIManager.Instance.PowerBarUpdate(0.05f);
                 _swordSlashCount++;
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
                 MMVibrationManager.Haptic(HapticTypes.LightImpact);
@@ -161,7 +184,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
             else
             {
-                demonSlashCount--;
+                demonSlashCount-= 2;
                 if (demonSlashCount < 0)
                 {
                     GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
@@ -171,7 +194,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                     StartCoroutine(FallRout());
                 }
                 UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
-                UIManager.Instance.PowerBarUpdate(-1);
+                UIManager.Instance.PowerBarUpdate(-0.1f);
                 MMVibrationManager.Haptic(HapticTypes.Failure);
                 audioManager.WrongSound();
             }
@@ -186,6 +209,33 @@ public class PlayerController : MonoSingleton<PlayerController>
             audioManager.CollectSound();
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        LavaObstacle lavaObstacle = other.gameObject.GetComponent<LavaObstacle>();
+        if (lavaObstacle)
+        {
+            _lavaTimer += Time.deltaTime;
+            if (_lavaTimer >= 1f)
+            {
+                _lavaTimer = 0f;
+                demonSlashCount-= 2;
+                if (demonSlashCount < 0)
+                {
+                    GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
+                    playerAnim.SetTrigger(Fall);
+                    MMVibrationManager.Haptic(HapticTypes.Failure);
+                    UIManager.Instance.RetryPanel();
+                    StartCoroutine(FallRout());
+                }
+                UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+                UIManager.Instance.PowerBarUpdate(-0.1f);
+                MMVibrationManager.Haptic(HapticTypes.Failure);
+                audioManager.WrongSound();
+            }
+        }
+    }
+
     public void SumDiamond()
     {
         _diamond += diamondCount;
@@ -244,7 +294,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         getsugaEffect.SetActive(true);
         audioManager.GetsugaSound();
         swordEnergy.SetActive(false);
-        getsugaEffect.transform.DOLocalMove(target.position, 1.5f);
+        getsugaEffect.transform.DOLocalMove(target.position, 1.5f).OnComplete(GetsugaReset);
         StartCoroutine(DoorAnimStart(animator));
         animator.gameObject.GetComponent<Door>().Smoke();
     }
@@ -253,10 +303,14 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         yield return new WaitForSeconds(.25f);
         animator.SetTrigger(Getsuga);
-        getsugaEffect.transform.localPosition = _getsugaPos;
-        getsugaEffect.SetActive(false);
         yield return new WaitForSeconds(2f);
         StartCoroutine(DoorCamera());
+    }
+
+    private void GetsugaReset()
+    {
+        getsugaEffect.transform.localPosition = _getsugaPos;
+        getsugaEffect.SetActive(false);
     }
 
     private IEnumerator DoorCamera()

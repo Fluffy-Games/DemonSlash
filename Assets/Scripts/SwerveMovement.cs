@@ -8,7 +8,7 @@ public class SwerveMovement : MonoBehaviour
     [SerializeField] private Transform playerCamFollow;
     [SerializeField] private Vector3 doorOffset;
     
-    private float _swerveSpeed = 0.3f;
+    private float _swerveSpeed = 0.2f;
     private float _maxSwerveAmountX = 4f;
     private float _maxSwerveAmountMinusX = -4f;
 

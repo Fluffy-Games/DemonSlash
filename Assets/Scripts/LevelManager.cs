@@ -27,7 +27,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void RestartLevel()
     {
         UIManager.Instance.retryPanel.SetActive(false);
-        StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
+        StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index, false));
     }
 
     public void LoadNextLevel()
@@ -42,7 +42,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         PlayerPrefs.SetInt("index", _index);
         PlayerPrefs.SetInt("levelIndex", _levelIndex);
-        StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index));
+        StartCoroutine(UIManager.Instance.LevelLoadRoutine(_index, true));
     }
 
     public void ManageLevel(int index)

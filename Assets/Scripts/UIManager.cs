@@ -111,9 +111,12 @@ public class UIManager : MonoSingleton<UIManager>
         introPanel.GetComponent<Button>().interactable = true;
     }
     
-    public IEnumerator LevelLoadRoutine(int index)
+    public IEnumerator LevelLoadRoutine(int index, bool nextLevel)
     {
-        yield return new WaitForSeconds(2f);
+        if (nextLevel)
+        {
+            yield return new WaitForSeconds(2f);
+        }
         nextLevelPanel.SetActive(false);
         gamePanel.SetActive(false);
         StartCoroutine(FadePanelRout(0, 1));
@@ -140,16 +143,9 @@ public class UIManager : MonoSingleton<UIManager>
         text.text = $"{"LEVEL "+LevelManager.Instance.Index}";
     }
 
-    public void PowerBarUpdate(int value)
+    public void PowerBarUpdate(float value)
     {
-        if (value > 0)
-        {
-            powerBar.value += 0.05f;
-        }
-        else
-        {
-            powerBar.value -= 0.05f;
-        }
+        powerBar.value += value;
     }
     public void DiamondCountUpdate(int diamondCount)
     {

@@ -192,9 +192,9 @@ Material:
     - _Shape3XSpeed: 0
     - _Shape3YSpeed: 0
     - _ShapeAlphaWeight: 1
-    - _ShapeBrightness: 0.42
+    - _ShapeBrightness: 0.65
     - _ShapeColorWeight: 1
-    - _ShapeContrast: 1
+    - _ShapeContrast: 3.861
     - _ShapeDistortAmount: 0.5
     - _ShapeDistortXSpeed: 0.1
     - _ShapeDistortYSpeed: 0.1

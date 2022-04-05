@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using MoreMountains.NiceVibrations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -26,6 +27,11 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject capeEffectYellow;
     [SerializeField] private GameObject capeEffectGreen;
     
+    private int _upgradeCost;
+    [SerializeField] private TextMeshProUGUI upgradeText;
+    [SerializeField] private TextMeshProUGUI upgradeLevelText;
+    private int _powerIndex;
+    
     [SerializeField] private ParticleSystem slashEffect1;
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
@@ -37,6 +43,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     private int diamondCount;
     private int demonSlashCount;
     private int _diamond;
+    
+    [SerializeField] private int _powerMultiplier;
+    
     public int Diamond => _diamond;
     
     private Vector3 _getsugaPos;
@@ -56,11 +65,13 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private float _lavaTimer;
     private int _upgradeValue;
-    private int _upgradeCost;
 
     private void Start()
     {
         _diamond = PlayerPrefs.GetInt("diamond", 20000);
+        _upgradeCost = PlayerPrefs.GetInt("upgradeCost", 100);
+        _powerIndex = PlayerPrefs.GetInt("powerIndex", 1);
+        _powerMultiplier = PlayerPrefs.GetInt("powerMultiplier", 30);
         _getsugaPos = getsugaEffect.transform.localPosition;
         _endGetsugaPos = endGetsugaEffect.transform.localPosition;
         UIManager.Instance.TotalDiamond(_diamond);
@@ -80,6 +91,22 @@ public class PlayerController : MonoSingleton<PlayerController>
         _diamond = value;
         PlayerPrefs.SetInt("diamond", _diamond);
         UIManager.Instance.TotalDiamond(_diamond);
+    }
+    public void UpgradePower()
+    {
+        if (_diamond < _upgradeCost) return;
+        _powerMultiplier += 2;
+        _diamond -= _upgradeCost;
+        _upgradeCost += 10;
+        _powerIndex += 1;
+        PlayerPrefs.SetInt("powerMultiplier", _powerMultiplier);
+        PlayerPrefs.SetInt("upgradeCost", _upgradeCost);
+        PlayerPrefs.SetInt("diamond", _diamond);
+        PlayerPrefs.SetInt("upgradeCost",_upgradeCost);
+        PlayerPrefs.SetInt("powerIndex",_powerIndex);
+        UIManager.Instance.TotalDiamond(_diamond);
+        upgradeText.text = _upgradeCost.ToString();
+        upgradeLevelText.text = $"{"LEVEL " + _powerIndex}";
     }
     private void SetColorType()
     {
@@ -137,6 +164,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             StartCoroutine(GetsugaRout(door.target, door.GetComponent<Animator>()));
             playerAnim.SetTrigger(Spin);
             swordEnergy.SetActive(true);
+            StartCoroutine(CloseDoor(door.transform.GetChild(6).gameObject, door.transform.GetChild(7).gameObject));
         }
 
         if (obstacle )
@@ -236,7 +264,6 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
         }
     }
-
     public void SumDiamond()
     {
         _diamond += diamondCount;
@@ -289,6 +316,13 @@ public class PlayerController : MonoSingleton<PlayerController>
         StartCoroutine(CameraManager.Instance.CameraShake(4f));
     }
 
+    private IEnumerator CloseDoor(GameObject gameObject1,GameObject gameObject2)
+    {
+        yield return new WaitForSeconds(2);
+        gameObject1.SetActive(false);
+        gameObject2.SetActive(false);
+        
+    }
     private IEnumerator GetsugaRout(Transform target, Animator animator)
     {
         yield return new WaitForSeconds(.75f);
@@ -333,7 +367,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         audioManager.FinalGetsugaSound();
         yield return new WaitForSeconds(1.3f);
-        Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * 30f;
+        Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * _powerMultiplier;
         endGetsugaEffect.SetActive(true);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
         endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);

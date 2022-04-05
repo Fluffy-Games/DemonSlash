@@ -25,6 +25,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private TextMeshProUGUI levelTextIntro;
     [SerializeField] private TextMeshProUGUI levelTextGame;
     [SerializeField] private TextMeshProUGUI totalDiamondTextGame;
+    [SerializeField] public TextMeshProUGUI upgradePowerText;
     [SerializeField] private List<TextMeshProUGUI> introLevelTexts;
 
     [Header("AnimatedGem")] 

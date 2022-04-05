@@ -119,6 +119,7 @@ public class UIManager : MonoSingleton<UIManager>
         }
         nextLevelPanel.SetActive(false);
         gamePanel.SetActive(false);
+        PlayerController.Instance.CloseConfetti();
         StartCoroutine(FadePanelRout(0, 1));
         yield return new WaitForSeconds(1f);
         StartCoroutine(FadePanelRout(1, 0));

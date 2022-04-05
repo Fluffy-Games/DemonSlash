@@ -29,6 +29,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private ParticleSystem slashEffect1;
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
+    [SerializeField] private GameObject confetti;
     [SerializeField] private GameObject getsugaEffect;
     [SerializeField] private GameObject swordEnergy;
     [SerializeField] private GameObject endGetsugaEffect;
@@ -339,9 +340,15 @@ public class PlayerController : MonoSingleton<PlayerController>
         CameraManager.Instance.ChangeToSlash();
         yield return new WaitForSeconds(3f);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Stop();
+        confetti.SetActive(true);
         UIManager.Instance.WinPanel();
         ShopManager.Instance.IncreasePreUnlock();
         endGetsugaEffect.SetActive(false);
         endGetsugaEffect.transform.localPosition = _endGetsugaPos;
+    }
+
+    public void CloseConfetti()
+    {
+        confetti.SetActive(false);
     }
 }

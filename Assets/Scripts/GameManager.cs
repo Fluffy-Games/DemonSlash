@@ -6,6 +6,7 @@ public class GameManager : MonoSingleton<GameManager>
         MainGame,
         Idle,
         Lose,
+        Final,
         Victory
     }
     private GameState _currentGameState;

@@ -27,9 +27,9 @@ public class ShopManager : MonoSingleton<ShopManager>
         int value = _preUnlockIndex;
         _preUnlockIndex += 20;
         PlayerPrefs.SetInt("preUnlockIndex", _preUnlockIndex);
-        TextMeshProUGUI text = winSwordUi[_unlockIndex + 1].transform.GetChild(2).gameObject
+        TextMeshProUGUI text = winSwordUi[_unlockIndex + 1].transform.GetChild(3).gameObject
             .GetComponent<TextMeshProUGUI>();
-        Image image = winSwordUi[_unlockIndex + 1].transform.GetChild(1).gameObject
+        Image image = winSwordUi[_unlockIndex + 1].transform.GetChild(2).gameObject
             .GetComponent<Image>();
         StartCoroutine(IncreasePreUnlockRout(text, image, value));
     }

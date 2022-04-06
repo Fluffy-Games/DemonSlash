@@ -30,26 +30,32 @@ public class UIManager : MonoSingleton<UIManager>
 
     [Header("AnimatedGem")] 
     [SerializeField] private GameObject animatedGem;
-    [SerializeField] private Transform targetPosition;
-    [SerializeField] [Range(0.5f, 1.5f)] float minAnimDuration;
-    [SerializeField] [Range(1.5f, 2.1f)] float maxAnimDuration;
-    [SerializeField] float spread;
-    [SerializeField] Ease easeType;
+    [SerializeField] private Transform targetPositionGem;
+    [SerializeField] [Range(0.5f, 1.5f)] float minAnimDurationGem;
+    [SerializeField] [Range(1.5f, 2.1f)] float maxAnimDurationGem;
+    [SerializeField] float spreadGem;
+    [SerializeField] Ease easeTypeGem;
+    [Header("AnimatedEnergy")] 
+    [SerializeField] private GameObject animatedEnergy;
+    [SerializeField] private Transform collectedEnergyPosition;
+    [SerializeField] private Transform targetPositionEnergy;
+    [SerializeField] [Range(1, 2f)] float minAnimDurationEnergy;
+    [SerializeField] [Range(2f, 3f)] float maxAnimDurationEnergy;
+    [SerializeField] float spreadEnergy;
+    [SerializeField] Ease easeTypeEnergy;
 
     private int _gemValue = 40;
+    private int _energyValue = 10;
     private Queue<GameObject> _coinsQueue = new Queue<GameObject>();
+    private Queue<GameObject> _energyQueue = new Queue<GameObject>();
     
     [SerializeField] private Slider powerBar;
+    public float PowerBarValue => powerBar.value;
 
     private float _demonFontSize = 70f;
     private float _diamondFontSize = 70f;
     private float _diamondTotalFontSize = 50f;
-
-    private void Start()
-    {
-        
-    }
-
+    
     public void StartLevel()
     {
         introPanel.GetComponent<Button>().interactable = false;
@@ -58,6 +64,7 @@ public class UIManager : MonoSingleton<UIManager>
         gamePanel.SetActive(true);
         LevelTextUpdate(levelTextGame);
         PrepareCoins();
+        PrepareEnergy();
     }
     public void LevelProgress(float value)
     {
@@ -207,7 +214,14 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void TotalDiamond(int diamond)
     {
-        totalDiamondTextGame.text = $"{diamond}";
+        if (diamond >= 1000)
+        {
+            totalDiamondTextGame.text = (diamond / 1000f).ToString("F1") + "k";
+        }
+        else
+        {
+            totalDiamondTextGame.text = $"{diamond}";
+        }
         StartCoroutine(CustomPunchScale(totalDiamondTextGame, _diamondTotalFontSize));
     }
     
@@ -236,12 +250,12 @@ public class UIManager : MonoSingleton<UIManager>
                 coin.SetActive(true);
 
                 //move coin to the collected coin pos
-                coin.transform.position = collectedCoinPosition.position + new Vector3(Random.Range(-spread, spread), 0f, 0f);
+                coin.transform.position = collectedCoinPosition.position + new Vector3(Random.Range(-spreadGem, spreadGem), 0f, 0f);
 
                 //animate coin to target position
-                float duration = Random.Range(minAnimDuration, maxAnimDuration);
-                coin.transform.DOMove(targetPosition.position, duration)
-                    .SetEase(easeType)
+                float duration = Random.Range(minAnimDurationGem, maxAnimDurationGem);
+                coin.transform.DOMove(targetPositionGem.position, duration)
+                    .SetEase(easeTypeGem)
                     .OnComplete(() => {
                         //executes whenever coin reach target position
                         coin.SetActive(false);
@@ -254,6 +268,51 @@ public class UIManager : MonoSingleton<UIManager>
                     });
             }
         }
+    }
+    void PrepareEnergy()
+    {
+        GameObject energy;
+        for (int i = 0; i < _energyValue; i++)
+        {
+            energy = Instantiate(animatedEnergy, gamePanel.transform, true);
+            energy.SetActive(false);
+            _energyQueue.Enqueue(energy);
+        }
+    }
+    public void EnergyAnimate()
+    {
+        bool first = false;
+        for (int i = 0; i < _energyValue; i++)
+        {
+            //check if there's coins in the pool
+            if (_energyQueue.Count > 0)
+            {
+                //extract a coin from the pool
+                GameObject energy = _energyQueue.Dequeue();
+                energy.SetActive(true);
+
+                //move coin to the collected coin pos
+                energy.transform.position = collectedEnergyPosition.position + new Vector3(Random.Range(-spreadEnergy, spreadEnergy), Random.Range(-spreadEnergy / 2, spreadEnergy / 2), 0f) +
+                                            new Vector3((powerBar.value - 0.5f) * Screen.width * 0.7f, 0, 0);
+                Vector3 tempVec = targetPositionEnergy.position +
+                                  new Vector3(Random.Range(-spreadEnergy, spreadEnergy), Random.Range(-spreadEnergy / 2, spreadEnergy / 2), 0f);
+                //animate coin to target position
+                float duration = Random.Range(minAnimDurationEnergy, maxAnimDurationEnergy);
+                energy.transform.DOMove(tempVec, duration)
+                    .SetEase(easeTypeEnergy)
+                    .OnComplete(() => {
+                        //executes whenever coin reach target position
+                        energy.SetActive(false);
+                        _coinsQueue.Enqueue(energy);
+                        if (!first)
+                        {
+                            PlayerController.Instance.FinalScaleUp();
+                            first = true;
+                        }
+                    });
+            }
+        }
+        PrepareEnergy();
     }
 
     public void ShopPanelOpen(bool value)

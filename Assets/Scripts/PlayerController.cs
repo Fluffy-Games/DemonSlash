@@ -40,8 +40,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject swordEnergy;
     [SerializeField] private GameObject endGetsugaEffect;
 
-    private int diamondCount;
-    private int demonSlashCount;
+    private int _diamondCount;
+    private int _demonSlashCount;
     private int _diamond;
     
     [SerializeField] private int _powerMultiplier;
@@ -57,25 +57,32 @@ public class PlayerController : MonoSingleton<PlayerController>
     
     private int _swordSlashCount;
 
-    private ColorType colorType;
+    private ColorType _colorType;
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Getsuga = Animator.StringToHash("getsuga");
     private static readonly int Spin = Animator.StringToHash("spin");
     private static readonly int JumpAttack = Animator.StringToHash("jumpAttack");
 
     private float _lavaTimer;
-    private int _upgradeValue;
 
     private void Start()
     {
         _diamond = PlayerPrefs.GetInt("diamond", 20000);
-        _upgradeCost = PlayerPrefs.GetInt("upgradeCost", 100);
+        _upgradeCost = PlayerPrefs.GetInt("upgradeCost", 40);
         _powerIndex = PlayerPrefs.GetInt("powerIndex", 1);
         _powerMultiplier = PlayerPrefs.GetInt("powerMultiplier", 30);
         _getsugaPos = getsugaEffect.transform.localPosition;
         _endGetsugaPos = endGetsugaEffect.transform.localPosition;
         UIManager.Instance.TotalDiamond(_diamond);
         SetColorType();
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.Final)
+        {
+            FinalAttack();
+        }
     }
 
     public void StartLevel()
@@ -97,7 +104,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         if (_diamond < _upgradeCost) return;
         _powerMultiplier += 2;
         _diamond -= _upgradeCost;
-        _upgradeCost += 10;
+        _upgradeCost += 20;
         _powerIndex += 1;
         PlayerPrefs.SetInt("powerMultiplier", _powerMultiplier);
         PlayerPrefs.SetInt("upgradeCost", _upgradeCost);
@@ -113,13 +120,13 @@ public class PlayerController : MonoSingleton<PlayerController>
         switch (LevelManager.Instance.Index % 3)
         {
             case 0:
-                colorType = ColorType.Yellow;
+                _colorType = ColorType.Yellow;
                 break;
             case 1:
-                colorType = ColorType.Red;
+                _colorType = ColorType.Red;
                 break;
             case 2:
-                colorType = ColorType.Green;
+                _colorType = ColorType.Green;
                 break;
         }
         UpdatePlayerColor();
@@ -137,7 +144,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
         {
             GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
-            playerAnim.SetTrigger(JumpAttack);
             EndJumpAttack();
             ShopManager.Instance.CheckPreUnlock();
         }
@@ -145,8 +151,8 @@ public class PlayerController : MonoSingleton<PlayerController>
         if (lavaObstacle)
         {
             _lavaTimer = 0f;
-            demonSlashCount-= 2;
-            if (demonSlashCount < 0)
+            _demonSlashCount-= 2;
+            if (_demonSlashCount < 0)
             {
                 GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
                 playerAnim.SetTrigger(Fall);
@@ -154,7 +160,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                 UIManager.Instance.RetryPanel();
                 StartCoroutine(FallRout());
             }
-            UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+            UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
             UIManager.Instance.PowerBarUpdate(-0.1f);
             MMVibrationManager.Haptic(HapticTypes.Failure);
             audioManager.WrongSound();
@@ -178,7 +184,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (gate)
         {
-            colorType = gate.colorType;
+            _colorType = gate.colorType;
             colorChangeEffect.Play();
             UpdatePlayerColor();
             audioManager.ColorChangeSound();
@@ -188,10 +194,10 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             slashable.oneSlash = true;
             
-            if (slashable.colorType == colorType)
+            if (slashable.colorType == _colorType)
             {
-                demonSlashCount++;
-                UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+                _demonSlashCount++;
+                UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
                 UIManager.Instance.PowerBarUpdate(0.05f);
                 _swordSlashCount++;
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
@@ -213,8 +219,8 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
             else
             {
-                demonSlashCount-= 2;
-                if (demonSlashCount < 0)
+                _demonSlashCount-= 2;
+                if (_demonSlashCount < 0)
                 {
                     GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
                     playerAnim.SetTrigger(Fall);
@@ -222,7 +228,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                     UIManager.Instance.RetryPanel();
                     StartCoroutine(FallRout());
                 }
-                UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+                UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
                 UIManager.Instance.PowerBarUpdate(-0.1f);
                 MMVibrationManager.Haptic(HapticTypes.Failure);
                 audioManager.WrongSound();
@@ -231,8 +237,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         if (collectable)
         {
-            diamondCount++;
-            UIManager.Instance.DiamondCountUpdate(diamondCount);
+            _diamondCount++;
+            UIManager.Instance.DiamondCountUpdate(_diamondCount);
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             collectable.ImpactEffect();
             audioManager.CollectSound();
@@ -248,8 +254,8 @@ public class PlayerController : MonoSingleton<PlayerController>
             if (_lavaTimer >= 1f)
             {
                 _lavaTimer = 0f;
-                demonSlashCount-= 2;
-                if (demonSlashCount < 0)
+                _demonSlashCount-= 2;
+                if (_demonSlashCount < 0)
                 {
                     GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
                     playerAnim.SetTrigger(Fall);
@@ -257,7 +263,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                     UIManager.Instance.RetryPanel();
                     StartCoroutine(FallRout());
                 }
-                UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
+                UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
                 UIManager.Instance.PowerBarUpdate(-0.1f);
                 MMVibrationManager.Haptic(HapticTypes.Failure);
                 audioManager.WrongSound();
@@ -266,7 +272,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     }
     public void SumDiamond()
     {
-        _diamond += diamondCount;
+        _diamond += _diamondCount;
         PlayerPrefs.SetInt("diamond", _diamond);
         UIManager.Instance.TotalDiamond(_diamond);
     }
@@ -275,18 +281,19 @@ public class PlayerController : MonoSingleton<PlayerController>
         modelRoot.SetActive(false);
         modelRoot.transform.localPosition = Vector3.zero;
         transform.position = Vector3.zero;
+        transform.localScale = Vector3.one;
         playerRoot.transform.localPosition = Vector3.zero;
         modelRoot.SetActive(true);
-        diamondCount = 0;
-        demonSlashCount = 0;
-        UIManager.Instance.DemonSlashCountUpdate(demonSlashCount);
-        UIManager.Instance.DiamondCountUpdate(diamondCount);
+        _diamondCount = 0;
+        _demonSlashCount = 0;
+        UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
+        UIManager.Instance.DiamondCountUpdate(_diamondCount);
         SetColorType();
     }
 
     private void UpdatePlayerColor()
     {
-        switch (colorType)
+        switch (_colorType)
         {
             case ColorType.Green:
                 capeMesh.material = capeGreen;
@@ -358,15 +365,43 @@ public class PlayerController : MonoSingleton<PlayerController>
     private void EndJumpAttack()
     {
         Vector3 playerTarget = transform.localPosition + Vector3.forward * 10f;
-        transform.DOLocalMove(playerTarget, 1f);
+        transform.DOLocalMove(playerTarget, 1f).OnComplete((StartFinal));
         playerRoot.transform.DOLocalMove(Vector3.zero, 1f);
-        StartCoroutine(EndGetsugaAttack());
+        
     }
 
+    private void StartFinal()
+    {
+        GameManager.Instance.CurrentGameState = GameManager.GameState.Final;
+        playerAnim.SetBool(Run, false);
+    }
+
+    private void FinalAttack()
+    {
+        if (Input.GetMouseButtonDown(0) && UIManager.Instance.PowerBarValue > 0f)
+        {
+            UIManager.Instance.PowerBarUpdate(-.1f);
+            UIManager.Instance.EnergyAnimate();
+            if (UIManager.Instance.PowerBarValue <= 0f)
+            {
+                GameManager.Instance.CurrentGameState = GameManager.GameState.Victory;
+                StartCoroutine(EndGetsugaAttack());
+            }
+        }
+    }
+
+    public void FinalScaleUp()
+    {
+        transform.localScale += Vector3.one * .1f;
+        swordEnergy.SetActive(true);
+    }
     private IEnumerator EndGetsugaAttack()
     {
+        yield return new WaitForSeconds(1f);
+        playerAnim.SetTrigger(JumpAttack);
         audioManager.FinalGetsugaSound();
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(2.3f);
+        swordEnergy.SetActive(false);
         Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * _powerMultiplier;
         endGetsugaEffect.SetActive(true);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();

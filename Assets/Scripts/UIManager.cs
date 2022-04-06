@@ -16,6 +16,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject nextLevelPanel;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject gemObject;
+    [SerializeField] private GameObject tapPanel;
     [SerializeField] private Image fadePanel;
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI demonText;
@@ -318,5 +319,11 @@ public class UIManager : MonoSingleton<UIManager>
     public void ShopPanelOpen(bool value)
     {
         shopPanel.SetActive(value);
+        introPanel.GetComponent<Button>().interactable = !value;
+    }
+
+    public void TapPanel(bool value)
+    {
+        tapPanel.SetActive(value);
     }
 }

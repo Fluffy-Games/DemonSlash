@@ -38,6 +38,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject confetti;
     [SerializeField] private GameObject getsugaEffect;
     [SerializeField] private GameObject swordEnergy;
+    [SerializeField] private GameObject finalSwordEnergy;
     [SerializeField] private GameObject endGetsugaEffect;
 
     private int _diamondCount;
@@ -170,7 +171,6 @@ public class PlayerController : MonoSingleton<PlayerController>
             StartCoroutine(GetsugaRout(door.target, door.GetComponent<Animator>()));
             playerAnim.SetTrigger(Spin);
             swordEnergy.SetActive(true);
-            StartCoroutine(CloseDoor(door.transform.GetChild(6).gameObject, door.transform.GetChild(7).gameObject));
         }
 
         if (obstacle )
@@ -322,14 +322,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         yield return new WaitForSeconds(.75f);
         StartCoroutine(CameraManager.Instance.CameraShake(4f));
     }
-
-    private IEnumerator CloseDoor(GameObject gameObject1,GameObject gameObject2)
-    {
-        yield return new WaitForSeconds(2);
-        gameObject1.SetActive(false);
-        gameObject2.SetActive(false);
-        
-    }
     private IEnumerator GetsugaRout(Transform target, Animator animator)
     {
         yield return new WaitForSeconds(.75f);
@@ -374,6 +366,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         GameManager.Instance.CurrentGameState = GameManager.GameState.Final;
         playerAnim.SetBool(Run, false);
+        UIManager.Instance.TapPanel(true);
     }
 
     private void FinalAttack()
@@ -386,6 +379,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             {
                 GameManager.Instance.CurrentGameState = GameManager.GameState.Victory;
                 StartCoroutine(EndGetsugaAttack());
+                UIManager.Instance.TapPanel(false);
             }
         }
     }
@@ -393,7 +387,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void FinalScaleUp()
     {
         transform.localScale += Vector3.one * .1f;
-        swordEnergy.SetActive(true);
+        finalSwordEnergy.SetActive(true);
     }
     private IEnumerator EndGetsugaAttack()
     {
@@ -401,7 +395,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         playerAnim.SetTrigger(JumpAttack);
         audioManager.FinalGetsugaSound();
         yield return new WaitForSeconds(2.3f);
-        swordEnergy.SetActive(false);
+        finalSwordEnergy.SetActive(false);
         Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * _powerMultiplier;
         endGetsugaEffect.SetActive(true);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();

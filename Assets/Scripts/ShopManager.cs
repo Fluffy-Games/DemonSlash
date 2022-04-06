@@ -75,7 +75,7 @@ public class ShopManager : MonoSingleton<ShopManager>
     {
         for (int i = 0; i <= _unlockIndex; i++)
         {
-            swordUi[i].transform.GetChild(5).gameObject.SetActive(false);
+            swordUi[i].transform.GetChild(6).gameObject.SetActive(false);
         }
     }
     public void BuyItem(int index)
@@ -94,9 +94,9 @@ public class ShopManager : MonoSingleton<ShopManager>
         PlayerPrefs.SetInt("swordIndex", _swordIndex);
         foreach (var item in swordUi)
         {
-            item.transform.GetChild(3).gameObject.SetActive(true);
+            item.transform.GetChild(4).gameObject.SetActive(true);
         }
-        swordUi[_swordIndex].transform.GetChild(3).gameObject.SetActive(false);
+        swordUi[_swordIndex].transform.GetChild(4).gameObject.SetActive(false);
         UpdateSwords();
     }
 }

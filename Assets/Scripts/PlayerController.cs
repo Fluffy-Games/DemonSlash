@@ -356,10 +356,10 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void EndJumpAttack()
     {
-        Vector3 playerTarget = transform.localPosition + Vector3.forward * 10f;
-        transform.DOLocalMove(playerTarget, 1f).OnComplete((StartFinal));
-        playerRoot.transform.DOLocalMove(Vector3.zero, 1f);
-        
+        Vector3 playerTarget = transform.localPosition + Vector3.forward * 5f;
+        transform.DOLocalMove(playerTarget, .4f).OnComplete((StartFinal));
+        playerRoot.transform.DOLocalMove(Vector3.zero, .4f);
+        modelRoot.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
     private void StartFinal()
@@ -386,20 +386,23 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void FinalScaleUp()
     {
-        transform.localScale += Vector3.one * .1f;
+        transform.localScale += Vector3.one * .05f;
         finalSwordEnergy.SetActive(true);
     }
     private IEnumerator EndGetsugaAttack()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         playerAnim.SetTrigger(JumpAttack);
+        yield return new WaitForSeconds(0.5f);
+        Vector3 playerTarget = transform.localPosition + Vector3.forward * 5f;
+        transform.DOLocalMove(playerTarget, 1f);
         audioManager.FinalGetsugaSound();
-        yield return new WaitForSeconds(2.3f);
+        yield return new WaitForSeconds(1f);
         finalSwordEnergy.SetActive(false);
         Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * _powerMultiplier;
         endGetsugaEffect.SetActive(true);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
-        endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2f);
+        endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2.5f);
         CameraManager.Instance.ChangeToSlash();
         yield return new WaitForSeconds(3f);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Stop();

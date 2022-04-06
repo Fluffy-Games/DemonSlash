@@ -34,7 +34,7 @@ public class SwordItem : MonoBehaviour
     {
         if (_bought == 1)
         {
-            transform.GetChild(4).gameObject.SetActive(false);
+            transform.GetChild(5).gameObject.SetActive(false);
         }
     }
 }

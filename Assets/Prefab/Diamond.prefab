@@ -150,6 +150,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4644960939337977115, guid: 1ddf461a6c91e8a4189f17d6deaa24f2, type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644960939337977115, guid: 1ddf461a6c91e8a4189f17d6deaa24f2, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}

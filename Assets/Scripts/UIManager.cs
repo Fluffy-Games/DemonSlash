@@ -46,7 +46,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] Ease easeTypeEnergy;
 
     private int _gemValue = 40;
-    private int _energyValue = 10;
+    private int _energyValue = 6;
     private Queue<GameObject> _coinsQueue = new Queue<GameObject>();
     private Queue<GameObject> _energyQueue = new Queue<GameObject>();
     

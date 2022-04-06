@@ -35,6 +35,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private ParticleSystem slashEffect1;
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem colorChangeEffect;
+    [SerializeField] private ParticleSystem colorChangeEffectEnd;
     [SerializeField] private GameObject confetti;
     [SerializeField] private GameObject getsugaEffect;
     [SerializeField] private GameObject swordEnergy;
@@ -45,7 +46,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private int _demonSlashCount;
     private int _diamond;
     
-    [SerializeField] private int _powerMultiplier;
+    private int _powerMultiplier;
     
     public int Diamond => _diamond;
     
@@ -68,10 +69,10 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void Start()
     {
-        _diamond = PlayerPrefs.GetInt("diamond", 20000);
+        _diamond = PlayerPrefs.GetInt("diamond", 0);
         _upgradeCost = PlayerPrefs.GetInt("upgradeCost", 40);
         _powerIndex = PlayerPrefs.GetInt("powerIndex", 1);
-        _powerMultiplier = PlayerPrefs.GetInt("powerMultiplier", 30);
+        _powerMultiplier = PlayerPrefs.GetInt("powerMultiplier", 50);
         _getsugaPos = getsugaEffect.transform.localPosition;
         _endGetsugaPos = endGetsugaEffect.transform.localPosition;
         UIManager.Instance.TotalDiamond(_diamond);
@@ -103,7 +104,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void UpgradePower()
     {
         if (_diamond < _upgradeCost) return;
-        _powerMultiplier += 2;
+        _powerMultiplier += 5;
         _diamond -= _upgradeCost;
         _upgradeCost += 20;
         _powerIndex += 1;
@@ -350,15 +351,15 @@ public class PlayerController : MonoSingleton<PlayerController>
     private IEnumerator DoorCamera()
     {
         StartCoroutine(swerveMovement.DoorMove(true));
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.8f);
         StartCoroutine(swerveMovement.DoorMove(false));
     }
 
     private void EndJumpAttack()
     {
-        Vector3 playerTarget = transform.localPosition + Vector3.forward * 5f;
-        transform.DOLocalMove(playerTarget, .4f).OnComplete((StartFinal));
-        playerRoot.transform.DOLocalMove(Vector3.zero, .4f);
+        Vector3 playerTarget = transform.localPosition + Vector3.forward * 10f;
+        transform.DOLocalMove(playerTarget, 1f).OnComplete((StartFinal));
+        playerRoot.transform.DOLocalMove(Vector3.zero, 1f);
         modelRoot.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
@@ -388,6 +389,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         transform.localScale += Vector3.one * .05f;
         finalSwordEnergy.SetActive(true);
+        colorChangeEffectEnd.Play();
     }
     private IEnumerator EndGetsugaAttack()
     {
@@ -402,9 +404,9 @@ public class PlayerController : MonoSingleton<PlayerController>
         Vector3 getsugaTarget = modelRoot.transform.localPosition + Vector3.forward * _powerMultiplier;
         endGetsugaEffect.SetActive(true);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Play();
-        endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 2.5f);
+        endGetsugaEffect.transform.DOLocalMove(getsugaTarget, 3f);
         CameraManager.Instance.ChangeToSlash();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         endGetsugaEffect.GetComponentInChildren<VisualEffect>().Stop();
         confetti.SetActive(true);
         UIManager.Instance.WinPanel();

@@ -37,7 +37,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         _levelIndex++;
         if (_index >= levels.Count)
         {
-            _index = 3;
+            _index = 4;
         }
 
         PlayerPrefs.SetInt("index", _index);
@@ -54,7 +54,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         if (index >= levels.Count)
         {
-            _index = 3;
+            _index = 4;
         }
 
         if (levels.Count <= 0)

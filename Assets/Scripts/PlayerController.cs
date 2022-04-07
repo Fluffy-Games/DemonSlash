@@ -164,6 +164,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
             UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
             UIManager.Instance.PowerBarUpdate(-0.1f);
+            StartCoroutine(UIManager.Instance.CollectFeedbackText(1));
             MMVibrationManager.Haptic(HapticTypes.Failure);
             audioManager.WrongSound();
         }
@@ -172,6 +173,8 @@ public class PlayerController : MonoSingleton<PlayerController>
             StartCoroutine(GetsugaRout(door.target, door.GetComponent<Animator>()));
             playerAnim.SetTrigger(Spin);
             swordEnergy.SetActive(true);
+            UIManager.Instance.PowerBarUpdate(-.1f);
+            UIManager.Instance.EnergyAnimate(false);
         }
 
         if (obstacle )
@@ -200,6 +203,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                 _demonSlashCount++;
                 UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
                 UIManager.Instance.PowerBarUpdate(0.05f);
+                StartCoroutine(UIManager.Instance.CollectFeedbackText(0));
                 _swordSlashCount++;
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
                 MMVibrationManager.Haptic(HapticTypes.LightImpact);
@@ -231,6 +235,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                 }
                 UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
                 UIManager.Instance.PowerBarUpdate(-0.1f);
+                StartCoroutine(UIManager.Instance.CollectFeedbackText(1));
                 MMVibrationManager.Haptic(HapticTypes.Failure);
                 audioManager.WrongSound();
             }
@@ -240,6 +245,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             _diamondCount++;
             UIManager.Instance.DiamondCountUpdate(_diamondCount);
+            MMVibrationManager.Haptic(HapticTypes.LightImpact);
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             collectable.ImpactEffect();
             audioManager.CollectSound();
@@ -266,6 +272,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                 }
                 UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
                 UIManager.Instance.PowerBarUpdate(-0.1f);
+                StartCoroutine(UIManager.Instance.CollectFeedbackText(1));
                 MMVibrationManager.Haptic(HapticTypes.Failure);
                 audioManager.WrongSound();
             }
@@ -338,7 +345,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         yield return new WaitForSeconds(.25f);
         animator.SetTrigger(Getsuga);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(DoorCamera());
     }
 
@@ -351,7 +358,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private IEnumerator DoorCamera()
     {
         StartCoroutine(swerveMovement.DoorMove(true));
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(2f);
         StartCoroutine(swerveMovement.DoorMove(false));
     }
 
@@ -375,7 +382,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         if (Input.GetMouseButtonDown(0) && UIManager.Instance.PowerBarValue > 0f)
         {
             UIManager.Instance.PowerBarUpdate(-.1f);
-            UIManager.Instance.EnergyAnimate();
+            UIManager.Instance.EnergyAnimate(true);
             if (UIManager.Instance.PowerBarValue <= 0f)
             {
                 GameManager.Instance.CurrentGameState = GameManager.GameState.Victory;

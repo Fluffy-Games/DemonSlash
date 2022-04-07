@@ -26,8 +26,9 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private TextMeshProUGUI levelTextIntro;
     [SerializeField] private TextMeshProUGUI levelTextGame;
     [SerializeField] private TextMeshProUGUI totalDiamondTextGame;
-    [SerializeField] public TextMeshProUGUI upgradePowerText;
     [SerializeField] private List<TextMeshProUGUI> introLevelTexts;
+    [SerializeField] private List<GameObject> collectFeedbacks;
+    private int _feedbackIndex;
 
     [Header("AnimatedGem")] 
     [SerializeField] private GameObject animatedGem;
@@ -280,7 +281,7 @@ public class UIManager : MonoSingleton<UIManager>
             _energyQueue.Enqueue(energy);
         }
     }
-    public void EnergyAnimate()
+    public void EnergyAnimate(bool final)
     {
         bool first = false;
         for (int i = 0; i < _energyValue; i++)
@@ -299,13 +300,17 @@ public class UIManager : MonoSingleton<UIManager>
                                   new Vector3(Random.Range(-spreadEnergy, spreadEnergy), Random.Range(-spreadEnergy / 2, spreadEnergy / 2), 0f);
                 //animate coin to target position
                 float duration = Random.Range(minAnimDurationEnergy, maxAnimDurationEnergy);
+                if (!final)
+                {
+                    duration *= 0.5f;
+                }
                 energy.transform.DOMove(tempVec, duration)
                     .SetEase(easeTypeEnergy)
                     .OnComplete(() => {
                         //executes whenever coin reach target position
                         energy.SetActive(false);
                         _coinsQueue.Enqueue(energy);
-                        if (!first)
+                        if (!first && final)
                         {
                             PlayerController.Instance.FinalScaleUp();
                             first = true;
@@ -325,5 +330,33 @@ public class UIManager : MonoSingleton<UIManager>
     public void TapPanel(bool value)
     {
         tapPanel.SetActive(value);
+    }
+
+    public IEnumerator CollectFeedbackText(int i)
+    {
+        GameObject obj = collectFeedbacks[i].transform.GetChild(_feedbackIndex).gameObject;
+        TextMeshProUGUI text = obj.GetComponent<TextMeshProUGUI>();
+        _feedbackIndex++;
+        if (_feedbackIndex >= collectFeedbacks[i].transform.childCount)
+        {
+            _feedbackIndex = 0;
+        }
+        obj.SetActive(true);
+        float timer = 0f;
+        float originSize = 0f;
+        float targetSize = 1f;
+
+        while (true)
+        {
+            timer += Time.deltaTime * 3f;
+            text.fontSize = Mathf.Lerp(originSize, targetSize, timer);
+            yield return null;
+            if (timer >= 1f)
+            {
+                obj.SetActive(false);
+                text.fontSize = originSize;
+                break;
+            }
+        }
     }
 }

@@ -348,7 +348,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         while (true)
         {
-            timer += Time.deltaTime * 3f;
+            timer += Time.deltaTime * 2f;
             text.fontSize = Mathf.Lerp(originSize, targetSize, timer);
             yield return null;
             if (timer >= 1f)

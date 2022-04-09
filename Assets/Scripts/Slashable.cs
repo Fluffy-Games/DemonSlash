@@ -79,5 +79,10 @@ public class Slashable : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(false);
             StartCoroutine(SlashRout(cutPieces[0]));
         }
+
+        /*if (other.CompareTag("Player"))
+        {
+            Slash();
+        }*/
     }
 }

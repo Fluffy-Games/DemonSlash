@@ -136,12 +136,12 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void OnTriggerEnter(Collider other)
     {
-        Obstacle obstacle = other.GetComponentInParent<Obstacle>();
-        Collectable collectable = other.GetComponentInParent<Collectable>();
-        Gate gate = other.GetComponent<Gate>();
-        Slashable slashable = other.GetComponent<Slashable>();
-        Door door = other.GetComponent<Door>();
-        LavaObstacle lavaObstacle = other.GetComponent<LavaObstacle>();
+        //Obstacle obstacle = other.GetComponentInParent<Obstacle>();
+        //Collectable collectable = other.GetComponentInParent<Collectable>();
+        //Gate gate = other.GetComponent<Gate>();
+        //Slashable slashable = other.GetComponent<Slashable>();
+        //Door door = other.GetComponent<Door>();
+        //LavaObstacle lavaObstacle = other.GetComponent<LavaObstacle>();
         
         if(other.gameObject.CompareTag("Goal") && GameManager.Instance.CurrentGameState == GameManager.GameState.MainGame)
         {
@@ -150,7 +150,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             ShopManager.Instance.CheckPreUnlock();
         }
 
-        if (lavaObstacle)
+        if (other.gameObject.TryGetComponent(out LavaObstacle lavaObstacle))
         {
             _lavaTimer = 0f;
             _demonSlashCount-= 2;
@@ -168,7 +168,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             MMVibrationManager.Haptic(HapticTypes.Failure);
             audioManager.WrongSound();
         }
-        if (door)
+        if (other.gameObject.TryGetComponent(out Door door))
         {
             StartCoroutine(GetsugaRout(door.target, door.GetComponent<Animator>()));
             playerAnim.SetTrigger(Spin);
@@ -177,7 +177,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             UIManager.Instance.EnergyAnimate(false);
         }
 
-        if (obstacle )
+        if (other.transform.parent.gameObject.TryGetComponent(out Obstacle obstacle))
         {
             GameManager.Instance.CurrentGameState = GameManager.GameState.Lose;
             playerAnim.SetTrigger(Fall);
@@ -186,7 +186,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             StartCoroutine(FallRout());
         }
 
-        if (gate)
+        if (other.gameObject.TryGetComponent(out Gate gate))
         {
             _colorType = gate.colorType;
             colorChangeEffect.Play();
@@ -194,7 +194,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             audioManager.ColorChangeSound();
         }
 
-        if (slashable && !slashable.oneSlash)
+        if (other.gameObject.TryGetComponent(out Slashable slashable) && !slashable.oneSlash)
         {
             slashable.oneSlash = true;
             
@@ -208,15 +208,16 @@ public class PlayerController : MonoSingleton<PlayerController>
                 StartCoroutine(CameraManager.Instance.CameraShake(1.5f));
                 MMVibrationManager.Haptic(HapticTypes.LightImpact);
                 audioManager.SlashSound();
-                playerAnim.SetTrigger(_swordSlashCount %2 == 0 ? AttackIn: AttackOut);
-                
+
                 if (_swordSlashCount % 2 == 0)
                 {
+                    playerAnim.SetTrigger(AttackIn);
                     slashEffect1.Stop();
                     slashEffect1.Play();
                 }
                 else
                 {
+                    playerAnim.SetTrigger(AttackOut);
                     slashEffect2.Stop();
                     slashEffect2.Play();
                 }
@@ -241,7 +242,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             }
         }
 
-        if (collectable)
+        if (other.gameObject.TryGetComponent(out Collectable collectable))
         {
             _diamondCount++;
             UIManager.Instance.DiamondCountUpdate(_diamondCount);
@@ -254,8 +255,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void OnTriggerStay(Collider other)
     {
-        LavaObstacle lavaObstacle = other.gameObject.GetComponent<LavaObstacle>();
-        if (lavaObstacle)
+        //LavaObstacle lavaObstacle = other.gameObject.GetComponent<LavaObstacle>();
+        if (other.gameObject.TryGetComponent(out LavaObstacle lava))
         {
             _lavaTimer += Time.deltaTime;
             if (_lavaTimer >= 1f)
@@ -425,5 +426,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void CloseConfetti()
     {
         confetti.SetActive(false);
+    }
+
+    private void VibrationCheck()
+    {
+        Handheld.Vibrate();
     }
 }

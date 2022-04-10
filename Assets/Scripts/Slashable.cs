@@ -15,11 +15,21 @@ public class Slashable : MonoBehaviour
     public bool finalEnemy;
     public ColorType colorType;
 
+    private GameObject _go1;
+    private GameObject _go2;
+    
     private void OnEnable()
     {
         transform.GetChild(0).gameObject.SetActive(true);
         ResetModel();
         oneSlash = false;
+    }
+
+    private void OnDisable()
+    {
+        if (!_go1) return;
+        _go1.SetActive(true);
+        _go2.SetActive(true);
     }
 
     public void Slash()
@@ -43,8 +53,10 @@ public class Slashable : MonoBehaviour
         go.SetActive(true);
         Transform go1 = go.transform.GetChild(0);
         Transform go2 = go.transform.GetChild(1);
-        Material mat1 = go1.gameObject.GetComponent<MeshRenderer>().material;
-        Material mat2 = go2.gameObject.GetComponent<MeshRenderer>().material;
+        _go1 = go1.gameObject;
+        _go2 = go2.gameObject;
+        //Material mat1 = go1.gameObject.GetComponent<MeshRenderer>().material;
+        //Material mat2 = go2.gameObject.GetComponent<MeshRenderer>().material;
         float timer = 0f;
 
         float x1 = Random.Range(-0, 5);
@@ -53,16 +65,16 @@ public class Slashable : MonoBehaviour
         float y2 = Random.Range(-2, 2);
         Vector3 target1 = cutTargets[0].localPosition + (Vector3.right * x1) + (Vector3.up * y1);
         Vector3 target2 = cutTargets[1].localPosition + (Vector3.right * x2) + (Vector3.up * y2);
-        go1.DOLocalJump(target1, 2, 1, .75f);
-        go2.DOLocalJump(target2, 2, 1, .75f);
+        go1.DOLocalJump(target1, 2, 1, 1f);
+        go2.DOLocalJump(target2, 2, 1, 1f);
         while (true)
         {
-            timer += Time.deltaTime * 1.5f;
+            timer += Time.deltaTime * 1f;
 
             //go1.localPosition = Vector3.Lerp(go1.localPosition, cutTargets[0].localPosition, timer);
             //go2.localPosition = Vector3.Lerp(go2.localPosition, cutTargets[1].localPosition, timer);
-            mat1.SetFloat("_Dissolve", Mathf.Lerp(0, 1, timer));
-            mat2.SetFloat("_Dissolve", Mathf.Lerp(0, 1, timer));
+            //mat1.SetFloat("_Dissolve", Mathf.Lerp(0, 1, timer));
+            //mat2.SetFloat("_Dissolve", Mathf.Lerp(0, 1, timer));
             yield return null;
             if (timer >= 1f)
             {
@@ -70,6 +82,8 @@ public class Slashable : MonoBehaviour
             }
         }
         go.SetActive(false);
+        _go1.SetActive(false);
+        _go2.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -78,6 +92,7 @@ public class Slashable : MonoBehaviour
         {
             transform.GetChild(0).gameObject.SetActive(false);
             StartCoroutine(SlashRout(cutPieces[0]));
+            PlayerController.Instance.UpdateDiamondMultiplier(1 + (transform.parent.GetSiblingIndex() * 0.2f));
         }
 
         /*if (other.CompareTag("Player"))

@@ -680,7 +680,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614630}
   - {fileID: 8926484042661614625}
   - {fileID: 8926484042661614632}
-  m_UIPosition: {x: 942, y: 1069}
+  m_UIPosition: {x: 942, y: 1065}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1493,7 +1493,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":10.16015338897705,"y":0.28696122765541079,"z":0.0}'
+      m_SerializableObject: '{"x":10.16015338897705,"y":0.28696098923683169,"z":0.0}'
     m_Space: 2147483647
   m_Property:
     name: Color

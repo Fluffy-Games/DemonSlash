@@ -45,6 +45,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private int _diamondCount;
     private int _demonSlashCount;
     private int _diamond;
+    private float _diamondMultiplier;
     
     private int _powerMultiplier;
     
@@ -281,7 +282,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     }
     public void SumDiamond()
     {
-        _diamond += _diamondCount;
+        int currentDiamond = Mathf.RoundToInt(_diamondCount * _diamondMultiplier);
+        _diamond += currentDiamond;
         PlayerPrefs.SetInt("diamond", _diamond);
         UIManager.Instance.TotalDiamond(_diamond);
     }
@@ -295,6 +297,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         modelRoot.SetActive(true);
         _diamondCount = 0;
         _demonSlashCount = 0;
+        _diamondMultiplier = 0f;
         UIManager.Instance.DemonSlashCountUpdate(_demonSlashCount);
         UIManager.Instance.DiamondCountUpdate(_diamondCount);
         SetColorType();
@@ -431,5 +434,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     private void VibrationCheck()
     {
         Handheld.Vibrate();
+    }
+
+    public void UpdateDiamondMultiplier(float value)
+    {
+        _diamondMultiplier = value;
     }
 }

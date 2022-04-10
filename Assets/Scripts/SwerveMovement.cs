@@ -8,7 +8,7 @@ public class SwerveMovement : MonoBehaviour
     [SerializeField] private Transform playerCamFollow;
     [SerializeField] private Vector3 doorOffset;
     
-    private float _swerveSpeed = 0.2f;
+    private float _swerveSpeed = 0.25f;
     private float _maxSwerveAmountX = 4f;
     private float _maxSwerveAmountMinusX = -4f;
 
@@ -43,7 +43,7 @@ public class SwerveMovement : MonoBehaviour
         Vector3 targetFollow = originFollow + Vector3.up * y1;
         while (true)
         {
-            timer += Time.deltaTime * 1.4f;
+            timer += Time.deltaTime * 1.7f;
             modelTransform.localPosition = Vector3.Lerp(originModel, targetModel, timer);
             playerCamFollow.localPosition = Vector3.Lerp(originFollow, targetFollow, timer);
             yield return null;

@@ -78,6 +78,8 @@ public class PlayerController : MonoSingleton<PlayerController>
         _endGetsugaPos = endGetsugaEffect.transform.localPosition;
         UIManager.Instance.TotalDiamond(_diamond);
         SetColorType();
+        upgradeText.text = _upgradeCost.ToString();
+        upgradeLevelText.text = $"{"LEVEL " + _powerIndex}";
     }
 
     private void Update()
@@ -105,6 +107,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void UpgradePower()
     {
         if (_diamond < _upgradeCost) return;
+        colorChangeEffectEnd.Play();
         _powerMultiplier += 5;
         _diamond -= _upgradeCost;
         _upgradeCost += 20;

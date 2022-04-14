@@ -57,17 +57,17 @@ public class Slashable : MonoBehaviour
         _go2 = go2.gameObject;
         //Material mat1 = go1.gameObject.GetComponent<MeshRenderer>().material;
         //Material mat2 = go2.gameObject.GetComponent<MeshRenderer>().material;
-        float timer = 0f;
+        //float timer = 0f;
 
         float x1 = Random.Range(-0, 5);
         float x2 = Random.Range(-5, 0);
         float y1 = Random.Range(-2, 2);
         float y2 = Random.Range(-2, 2);
-        Vector3 target1 = cutTargets[0].localPosition + (Vector3.right * x1) + (Vector3.up * y1);
-        Vector3 target2 = cutTargets[1].localPosition + (Vector3.right * x2) + (Vector3.up * y2);
-        go1.DOLocalJump(target1, 2, 1, 1f);
-        go2.DOLocalJump(target2, 2, 1, 1f);
-        while (true)
+        Vector3 target1 = cutTargets[0].localPosition + (Vector3.right * x1) + (Vector3.up * y1) + Vector3.forward * 5f;
+        Vector3 target2 = cutTargets[1].localPosition + (Vector3.right * x2) + (Vector3.up * y2) + Vector3.forward * 5f;
+        go1.DOLocalJump(target1, 2, 1, .75f);
+        go2.DOLocalJump(target2, 2, 1, .75f);
+        /*while (true)
         {
             timer += Time.deltaTime * 1f;
 
@@ -80,7 +80,8 @@ public class Slashable : MonoBehaviour
             {
                 break;
             }
-        }
+        }*/
+        yield return new WaitForSeconds(0.65f);
         go.SetActive(false);
         _go1.SetActive(false);
         _go2.SetActive(false);

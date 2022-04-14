@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using GameAnalyticsSDK;
 using PathCreation;
 using UnityEngine;
 
@@ -17,11 +19,15 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void OnEnable()
     {
-        //GameAnalytics.Initialize();
         _index = PlayerPrefs.GetInt("index", 0);
         _levelIndex = PlayerPrefs.GetInt("levelIndex", 1);
         ManageLevel(_index);
         UIManager.Instance.UpdateIntroLevelTexts();
+    }
+
+    private void Start()
+    {
+        GameAnalytics.Initialize();
     }
 
     public void RestartLevel()

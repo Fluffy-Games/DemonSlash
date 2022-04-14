@@ -18,6 +18,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject gemObject;
     [SerializeField] private GameObject tapPanel;
     [SerializeField] private Image fadePanel;
+    [SerializeField] private GameObject nextButton;
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI demonText;
     [SerializeField] private TextMeshProUGUI demonTextEnd;
@@ -57,7 +58,13 @@ public class UIManager : MonoSingleton<UIManager>
     private float _demonFontSize = 70f;
     private float _diamondFontSize = 70f;
     private float _diamondTotalFontSize = 50f;
-    
+
+    private void Start()
+    {
+        PrepareCoins();
+        PrepareEnergy();
+    }
+
     public void StartLevel()
     {
         introPanel.GetComponent<Button>().interactable = false;
@@ -65,8 +72,6 @@ public class UIManager : MonoSingleton<UIManager>
         gemObject.SetActive(false);
         gamePanel.SetActive(true);
         LevelTextUpdate(levelTextGame);
-        PrepareCoins();
-        PrepareEnergy();
     }
     public void LevelProgress(float value)
     {
@@ -77,6 +82,7 @@ public class UIManager : MonoSingleton<UIManager>
         introPanel.SetActive(true);
         gamePanel.SetActive(false);
         LevelTextUpdate(levelTextIntro);
+        nextButton.SetActive(true);
     }
     public void UpdateIntroLevelTexts()
     {
@@ -240,6 +246,7 @@ public class UIManager : MonoSingleton<UIManager>
     }
     public void GemAnimate(Transform collectedCoinPosition)
     {
+        nextButton.SetActive(false);
         bool first = false;
         gemObject.SetActive(true);
         for (int i = 0; i < _gemValue; i++)
@@ -270,6 +277,7 @@ public class UIManager : MonoSingleton<UIManager>
                     });
             }
         }
+        PrepareCoins();
     }
     void PrepareEnergy()
     {

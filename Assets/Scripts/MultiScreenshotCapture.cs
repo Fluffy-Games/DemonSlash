@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -590,4 +590,4 @@ namespace MultiScreenshotCaptureNamespace
 			return typeof( EditorWindow ).Assembly.GetType( "UnityEditor." + type );
 		}
 	}
-}
+}*/

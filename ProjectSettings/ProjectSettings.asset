@@ -157,9 +157,10 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.FluffyGames.DemonSlash
     Standalone: com.DefaultCompany.DemonSlash
+    iPhone: com.FluffyGames.DemonSlash
   buildNumber:
     Standalone: 0
-    iPhone: 0
+    iPhone: 2
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 2
@@ -704,6 +705,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: UNITY_POST_PROCESSING_STACK_V2;MOREMOUNTAINS_NICEVIBRATIONS;PROBUILDER_EXPERIMENTAL_FEATURES
+    4: MOREMOUNTAINS_NICEVIBRATIONS
     7: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES;MOREMOUNTAINS_NICEVIBRATIONS
     13: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES
     14: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES

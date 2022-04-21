@@ -136,7 +136,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0.1
+  bundleVersion: 1.0.2
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -163,7 +163,7 @@ PlayerSettings:
     iPhone: 2
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
-  AndroidBundleVersionCode: 2
+  AndroidBundleVersionCode: 3
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 1
@@ -239,7 +239,7 @@ PlayerSettings:
   clonedFromGUID: 9870af204204ab84596f8a656f2f2ce6
   templatePackageId: com.unity.template.universal@10.8.0
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0
   useCustomLauncherGradleManifest: 0

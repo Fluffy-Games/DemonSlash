@@ -13,7 +13,24 @@ public class SwerveInput : MonoBehaviour
         if (GameManager.Instance.CurrentGameState != GameManager.GameState.MainGame) return;
         GetInput();
     }
-
+#if UNITY_EDITOR
+    private void GetInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _lastPosX = Input.mousePosition.x;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            _moveX = (Input.mousePosition.x - _lastPosX) * 10;
+            _lastPosX = Input.mousePosition.x;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            _moveX = 0f;
+        }
+    }
+#else
     private void GetInput()
     {
         if (Input.touchCount > 0)
@@ -43,4 +60,5 @@ public class SwerveInput : MonoBehaviour
             }
         }
     }
+#endif
 }

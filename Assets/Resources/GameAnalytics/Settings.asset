@@ -26,21 +26,21 @@ MonoBehaviour:
   UserMessagesFailed: 0
   CustomArea: 
   gameKey:
-  - dc676e681bb4bdd88147e1ab4a0073a9
+  - b6209d286b2afd71acb6db4cb05e0fce
   secretKey:
-  - b7a2b9ccb69de83d2daad35b7eeb3cef3530c6d5
+  - 8ca0235138c21906f70a552fb0bca9e531f8c08a
   Build:
   - 1.0.2
   SelectedPlatformOrganization:
-  - SuperSonic Studios
+  - FluffyGames
   SelectedPlatformStudio:
   - Fluffy Games
   SelectedPlatformGame:
-  - Demon Slash - Android
-  SelectedPlatformGameID: 9c010300
-  SelectedOrganization: 01000000
+  - Demon Slash
+  SelectedPlatformGameID: 19fe0200
+  SelectedOrganization: 02000000
   SelectedStudio: 01000000
-  SelectedGame: 01000000
+  SelectedGame: 05000000
   NewVersion: 7.3.23
   Changes: '7.3.23
 
@@ -63,7 +63,7 @@ MonoBehaviour:
   GameName: Demon Slash iOS
   OrganizationName: 
   OrganizationIdentifier: 
-  EmailGA: recepcan.kececi@gmail.com
+  EmailGA: fluffygamestr@gmail.com
   IntroScreen: 0
   InfoLogEditor: 1
   InfoLogBuild: 1

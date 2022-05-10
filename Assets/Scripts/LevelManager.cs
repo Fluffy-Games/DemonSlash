@@ -16,7 +16,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         get => _levelIndex;
     }
-
+    
     private void OnEnable()
     {
         _index = PlayerPrefs.GetInt("index", 0);

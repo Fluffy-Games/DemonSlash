@@ -136,7 +136,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0.2
+  bundleVersion: 1.0.3
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -163,8 +163,8 @@ PlayerSettings:
     iPhone: 2
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
-  AndroidBundleVersionCode: 3
-  AndroidMinSdkVersion: 22
+  AndroidBundleVersionCode: 4
+  AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -241,9 +241,9 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 1
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
-  useCustomLauncherGradleManifest: 0
-  useCustomBaseGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
+  useCustomLauncherGradleManifest: 1
+  useCustomBaseGradleTemplate: 1
   useCustomGradlePropertiesTemplate: 0
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
@@ -705,8 +705,8 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: UNITY_POST_PROCESSING_STACK_V2;MOREMOUNTAINS_NICEVIBRATIONS;PROBUILDER_EXPERIMENTAL_FEATURES
-    4: MOREMOUNTAINS_NICEVIBRATIONS
-    7: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES;MOREMOUNTAINS_NICEVIBRATIONS
+    4: MOREMOUNTAINS_NICEVIBRATIONS;TTP_REWARDED_INTERSTITIALS;TTP_PRIVACY_SETTINGS;TTP_APPSFLYER;TTP_REWARDED_ADS;TTP_PROMOTION;TTP_INTERSTITIALS;TTP_ANALYTICS;TTP_GAMEPROGRESSION;TTP_RATEUS;TTP_BANNERS;TTP_POPUPMGR;TTP_CRASHTOOL;TTP_OPENADS
+    7: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES;MOREMOUNTAINS_NICEVIBRATIONS;TTP_REWARDED_INTERSTITIALS;TTP_PRIVACY_SETTINGS;TTP_APPSFLYER;TTP_REWARDED_ADS;TTP_PROMOTION;TTP_INTERSTITIALS;TTP_ANALYTICS;TTP_GAMEPROGRESSION;TTP_RATEUS;TTP_BANNERS;TTP_POPUPMGR;TTP_CRASHTOOL;TTP_OPENADS
     13: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES
     14: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES
     19: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES

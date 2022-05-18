@@ -53,7 +53,6 @@ public class ShopManager : MonoSingleton<ShopManager>
             PlayerPrefs.SetInt("unlockIndex", _unlockIndex);
             _preUnlockIndex = 0;
             PlayerPrefs.SetInt("preUnlockIndex", _preUnlockIndex);
-            UnlockItem();
         }
 
         foreach (var item in winSwordUi)

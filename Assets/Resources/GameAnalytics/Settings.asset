@@ -26,21 +26,27 @@ MonoBehaviour:
   UserMessagesFailed: 0
   CustomArea: 
   gameKey:
-  - dc676e681bb4bdd88147e1ab4a0073a9
+  - b6209d286b2afd71acb6db4cb05e0fce
+  - f9ff839cd9b0f3f9e2dd18a08fd72949
   secretKey:
-  - b7a2b9ccb69de83d2daad35b7eeb3cef3530c6d5
+  - 8ca0235138c21906f70a552fb0bca9e531f8c08a
+  - 0f89f78b3d7e835eff45f8262ab3608931e3f672
   Build:
-  - 1.0.2
+  - 1.0.0
+  - 1.0.0
   SelectedPlatformOrganization:
-  - SuperSonic Studios
+  - FluffyGames
+  - FluffyGames
   SelectedPlatformStudio:
   - Fluffy Games
+  - Fluffy Games
   SelectedPlatformGame:
-  - Demon Slash - Android
-  SelectedPlatformGameID: 9c010300
-  SelectedOrganization: 01000000
-  SelectedStudio: 01000000
-  SelectedGame: 01000000
+  - Demon Slash
+  - Demon Slash iOS
+  SelectedPlatformGameID: 19fe02001afe0200
+  SelectedOrganization: 0100000001000000
+  SelectedStudio: 0100000001000000
+  SelectedGame: 0600000007000000
   NewVersion: 7.3.23
   Changes: '7.3.23
 
@@ -63,7 +69,7 @@ MonoBehaviour:
   GameName: Demon Slash iOS
   OrganizationName: 
   OrganizationIdentifier: 
-  EmailGA: recepcan.kececi@gmail.com
+  EmailGA: fluffygamestr@gmail.com
   IntroScreen: 0
   InfoLogEditor: 1
   InfoLogBuild: 1
@@ -77,7 +83,7 @@ MonoBehaviour:
   ResourceItemTypes: []
   ResourceCurrencies: []
   LastCreatedGamePlatform: -1
-  Platforms: 0b000000
+  Platforms: 0b00000008000000
   CurrentInspectorState: 1
   ClosedHints: 
   DisplayHints: 0
@@ -105,7 +111,7 @@ MonoBehaviour:
   IncludeGooglePlay: 1
   FpsCriticalThreshold: 20
   FpsCirticalSubmitInterval: 1
-  PlatformFoldOut: 01
+  PlatformFoldOut: 0101
   CustomDimensions01FoldOut: 0
   CustomDimensions02FoldOut: 0
   CustomDimensions03FoldOut: 0

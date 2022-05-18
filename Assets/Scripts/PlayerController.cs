@@ -151,6 +151,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             GameManager.Instance.CurrentGameState = GameManager.GameState.Idle;
             EndJumpAttack();
+            ShopManager.Instance.CheckPreUnlock();
         }
 
         if (other.gameObject.TryGetComponent(out LavaObstacle lavaObstacle))
@@ -381,7 +382,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         GameManager.Instance.CurrentGameState = GameManager.GameState.Final;
         playerAnim.SetBool(Run, false);
         UIManager.Instance.TapPanel(true);
-        ShopManager.Instance.CheckPreUnlock();
     }
 
     private void FinalAttack()
